@@ -5,9 +5,8 @@ SET opsDone TO FALSE.
 
 output("CHECKING FOR SAVED STATE").
 IF core:volume:exists("/opsData/state.sav"){
-	PRINT("Saved state: " + OPEN("/opsData/state.sav"):readall:string).
 	output("SAVED STATE FOUND!").
-	SET opState TO OPEN("/opsData/state.sav"):readall:string:TONUMBER(55).
+	SET opState TO OPEN("/opsData/state.sav"):readall:string:TONUMBER(0).
 }
 output("OPSTATE IS SET TO "+opState).
 output("RUNNING OPS").
@@ -38,10 +37,11 @@ UNTIL opsDone	{
 		IF opState = 2 AND timeout < timer{
 			output("SEPARATION STAGE 1").
 			SET opState TO 3.
+			SET timeout TO timer + 3.
 			STAGE.
 		}
 
-		IF opState = 3 AND ship_pitch < 55{
+		IF opState = 3 AND timer >= timeout AND ship_pitch < 60{
 			output("IGNITION STAGE 2").
 			SET opState TO 4.
 			STAGE.
@@ -64,7 +64,7 @@ UNTIL opsDone	{
 			STAGE.
 		}
 
-		IF opState = 7 AND ETA:APOAPSIS < 30{
+		IF opState = 7 AND ETA:APOAPSIS < 60{
 			output("PREPARE TO FIRE STAGE 3").
 			SET opState TO 8.
 			STAGE.
@@ -74,7 +74,7 @@ UNTIL opsDone	{
 			output("ATTEMPTING TO CIRCULARIZE").
 			SET opState TO 9.
 			LOCK STEERING TO ship:prograde.
-			LOCK THROTTLE TO ((20-ETA:APOAPSIS)/10).
+			LOCK THROTTLE TO ((45-ETA:APOAPSIS)/10).
 		}
 
 		IF opState = 9 AND (ABS(ship:apoapsis - ship:periapsis) < 1000) AND ship:periapsis > 70000{
@@ -91,6 +91,6 @@ UNTIL opsDone	{
 			output("OPS-EXECUTION DONE").
 			SET opsDone TO TRUE.
 		}
-	}
+	}	
 	wait 0.
 }

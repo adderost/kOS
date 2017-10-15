@@ -130,8 +130,13 @@ FUNCTION checkSignal {
 
 //LOADS DEPENDENCIES INTO SYSTEM
 FUNCTION bootSequence {
-	//TODO. MAKE SYSTEM ABLE TO RESUME FROM SHUTDOWN
 	checkSignal().
+
+	//CHECK FOR SAVED STATES ON LOCAL STORAGE
+	IF core:volume:exists("/systemData/opcode.sav"){
+		systemLog("RESTORING SAVED STATE").
+		SET opCode TO OPEN("/systemData/opcode.sav"):readall:string:TONUMBER(0).
+	}
 
 	//FIRST TRY TO DOWNLOAD DEPENDENCIES
 	IF hasSignalKSC {
@@ -157,34 +162,40 @@ FUNCTION bootSequence {
 	}
 }
 
-//CHECKS FOR SHIP SPECIFIC OPERATIONS. RUNS THEM IF THEY EXIST
+//CHECKS FOR SHIP SPECIFIC OPERATIONS. DOWNLOADS AND RUNS
 FUNCTION opsRun {
-		
-	// check IF a new ops file is waiting TO be executed
-	IF hasSignalKSC AND NOT archive:open("/"+ship:name + "/ops.ks"):readall:empty {
-		COPYPATH("0:/" + ship:name + "/ops.ks", "/ops/ops.ks").
-		systemLog("operations received, executing Operations " + opCode).
-		RUNPATH("/ops/ops.ks").
-		IF deleteOnFinish {
-			core:volume:delete("/ops/ops.ks").
-		}
-		ELSE {
-			MOVEPATH("/ops/ops.ks", "/ops/oldOps"+opcode+".ks").
-		}
+	
+	checkSignal().
 
-		systemLog("Operations "+opCode+" complete").
-		IF hasSignalKSC { 
-			COPYPATH("0:/" + ship:name + "/ops.ks", "0:/" + ship:name + "/ops" + opCode + ".ks").
-			archive:open("/"+ship:name + "/ops.ks"):clear.
+	//Save state in case of power down.
+	IF core:volume:exists("/systemData/opcode.sav")	OPEN("/systemData/opcode.sav"):clear.
+	ELSE CREATE("/systemData/opcode.sav").
+	OPEN("/systemData/opcode.sav"):write(opCode:TOSTRING).
+
+	SET opsFilename TO "ops_"+opCode+".ks".
+	
+	//Check if we have a new opsFile.
+	//If we do, download it and name it according to opCode.
+	IF hasSignalKSC {
+		IF archive:exists("/"+ship:name+"/ops.ks") {
+			systemLog("Downloading operations: "+opsFilename).
+			IF COPYPATH("0:/"+ship:name+"/ops.ks", "0:/"+ship:name+"/"+opsFilename){
+				archive:delete("/"+ship:name+"/ops.ks").
+				COPYPATH("0:/"+ship:name+"/"+opsFilename, "/ops/"+opsFilename).
+			}		
 		}
-		systemLog("Waiting to receive operations...").
+	}
+
+	IF core:volume:exists("/ops/"+opsFilename) {
+		systemLog("Running stored operation: "+opsFilename).
+		RUNPATH("/ops/"+opsFilename).
+		systemLog("Operation execution finished: "+opsFilename).
+		IF deleteOnFinish {
+			systemLog("Deleting operations file from internal memory: "+opsFilename).
+			core:volume:delete("/ops/"+opsFilename).
+		}
 		SET opCode TO opCode + 1.
 	}
-	// Run any existing ops
-	ELSE IF core:volume:exists("/ops/ops.ks") {
-		systemLog("Running stored operations...").
-		RUNPATH("/ops/ops.ks").
-	}	
 }
 
 //RUNS BOOT SEQUENCE
@@ -198,6 +209,5 @@ UNTIL initialized {
 systemLog("Starting OPS-loop").
 UNTIL systemInterrupt{
 	opsRun().
-	checkSignal().
 	wait 0.
 }
