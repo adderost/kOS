@@ -85,13 +85,8 @@ UNTIL opsDone	{
 		SET timeout TO timer+10.
 	}
 	IF opState = 10 AND timer > timeout {
-		output("OPS-EXECUTION DONE - WILL START PINGING").
-		SET lastOutput TO newTime.
-		SET opState TO 11.
-	}
-	IF opState = 11 AND newTime > (lastOutput + 60) {
-		output("PING! Altitude:" +ROUND(ship:altitude)+"m").
-		SET lastOutput TO newTime.
+		output("OPS-EXECUTION DONE - WILL END OPS").
+		SET opsDone TO TRUE.
 	}
 	wait 0.
 }
