@@ -16,8 +16,8 @@ All vessels comes preloaded with an OS from the /boot-folder
 
 # Vessel ops (Newest vessels first)
 * # Continuator MK2 C
-  - Virtually identical to MK2 B.
   - Currently orbiting at approx 120km. Working as a comms relay satellite. Ready to recieve new ops
+  - Virtually identical to MK2 B.
   - Intermittently loses electrical power on dark side of planet, incufficient batteries on board.
   - Used the same launch profile as the MK2 and MK2 B.
   - Ops completed when orbital insertion was verified.
