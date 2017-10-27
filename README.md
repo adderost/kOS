@@ -17,7 +17,7 @@ All vessels comes preloaded with an OS from the /boot-folder*
   - output.ks Provides methods to log to multiple files and transmitting these to KSC.
   - telemetry.ks Provides methods for the vessel to get detailed data about its current position
 
-* /<ship-name>
+* / ship name 
   - Contains ops and logs for specific vessels. These folders are the storage archives for the vessels.
 
 ## Continuator MK2-Series
