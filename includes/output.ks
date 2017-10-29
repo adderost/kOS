@@ -13,8 +13,8 @@ FUNCTION output {
 FUNCTION outputToArchive {
   PARAMETER str.
   PARAMETER logFile.
-  IF NOT archive:exists("/" + ship:name + "/log/"+logFile) archive:create("/" + ship:name + "/log/"+logFile).
-  archive:open("/" + ship:name + "/log/"+logFile):writeln(str).
+  IF NOT archive:exists("/Vessels/" + ship:name + "/log/"+logFile) archive:create("/Vessels" + ship:name + "/log/"+logFile).
+  archive:open("/Vessels/" + ship:name + "/log/"+logFile):writeln(str).
 }
 FUNCTION dumpLogCache {
   IF core:volume:exists("/logCache") {
