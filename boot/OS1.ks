@@ -8,6 +8,7 @@ SET initialized TO FALSE.
 SET systemInterrupt TO 	FALSE.
 //STATIC VARIABLES
 SET systemBootTime TO TIME:SECONDS.
+SET shipArchive TO "/Vessels/" + ship:name.
 //DYNAMIC GLOBAL VARIABLES
 SET hasSignal TO FALSE.
 SET hasSignalKSC TO FALSE.
@@ -31,7 +32,7 @@ FUNCTION dumpSystemLog{
 	IF hasSignalKSC{
 		IF core:volume:exists("/system.log"){
 			SET logstr TO OPEN("/system.log"):READALL:STRING.
-			LOG logstr TO "0:/Vessels/"+SHIP:NAME+"/log/system.log".
+			LOG logstr TO "0:"+shipArchive+"/log/system.log".
 			DELETEPATH("/system.log").
 		}
 	}
@@ -148,11 +149,11 @@ FUNCTION opsRun {
 	OPEN("/systemData/opcode.sav"):write(opCode:TOSTRING).
 	SET opsFilename TO "ops_"+opCode+".ks".	
 	IF hasSignalKSC {
-		IF archive:exists("/Vessels/"+ship:name+"/ops.ks") {
+		IF archive:exists(shipArchive+"/ops.ks") {
 			systemLog("Downloading operations: "+opsFilename).
-			IF COPYPATH("0:/Vessels/"+ship:name+"/ops.ks", "0:/Vessels/"+ship:name+"/"+opsFilename){
-				archive:delete("/Vessels/"+ship:name+"/ops.ks").
-				IF NOT COPYPATH("0:/Vessels/"+ship:name+"/"+opsFilename, "/ops/"+opsFilename) systemLog("Download of operations failed. Free space: "+core:volume:freespace+" bytes").
+			IF COPYPATH("0:"+shipArchive+"/ops.ks", "0:"+shipArchive+"/"+opsFilename){
+				archive:delete(shipArchive+"/ops.ks").
+				IF NOT COPYPATH("0:"+shipArchive+"/"+opsFilename, "/ops/"+opsFilename) systemLog("Download of operations failed. Free space: "+core:volume:freespace+" bytes").
 			}
 		}
 	}
