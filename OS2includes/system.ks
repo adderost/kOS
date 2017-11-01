@@ -1,5 +1,4 @@
 //CONFIG
-SET me TO "System".
 
 //DEPENDENCIES
 wantModule("IO").
@@ -7,18 +6,18 @@ wantModule("IO").
 //MODULE
 //SHUTS DOWN SYSTEM AND ATTEMPTS LOGDUMP
 FUNCTION shutdownSystem{
-	systemLog("SYSTEM SHUTDOWN", me).
+	systemLog("SYSTEM SHUTDOWN", "System").
 	dumpSystemLog().
 	SHUTDOWN.
 }
 //REBOOTS SYSTEM
 FUNCTION rebootSystem{
-	systemLog("SYSTEM REBOOTING", me).
+	systemLog("SYSTEM REBOOTING", "System").
 	REBOOT.
 }
 //REBOOTS WITH A MESSAGE
 FUNCTION systemInterrupt{
 	PARAMETER msg IS "".
-	IF hasModule("IO") systemLog(msg, me).
+	IF hasModule("IO") systemLog(msg, "System").
 	rebootSystem().
 }

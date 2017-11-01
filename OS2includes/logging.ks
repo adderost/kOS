@@ -1,5 +1,5 @@
 //CONFIG
-SET me TO "Logging".
+SET saveLocalLogs TO FALSE.
 
 //DEPENDENCIES
 needModule("IO").
@@ -11,10 +11,9 @@ FUNCTION output {
   PARAMETER logFile IS "output.log".
   SET logStr TO "[" +round(timer)+ "] " + text.
   IF saveLocalLogs safeLog(logStr, ("/log/"+logFile)).
-  
   outputToArchive(logStr, logfile). 
-
 }
+
 FUNCTION outputToArchive {
   PARAMETER str.
   PARAMETER logFile.
@@ -35,7 +34,7 @@ FUNCTION outputToArchive {
 FUNCTION dumpLogCache {
   IF core:volume:exists("/logCache") {
     FOR cacheFile IN core:volume:open("/logCache"):list:values{
-      systemLog("Dumping cached log "+cacheFile, me).
+      systemLog("Dumping cached log "+cacheFile, "Logging").
       IF NOT core:volume:open("/logCache/"+cacheFile):readall:empty {
         SET cacheIterator to core:volume:open("/logCache/"+cacheFile):readall:iterator.
         UNTIL NOT cacheIterator:NEXT {
@@ -43,13 +42,13 @@ FUNCTION dumpLogCache {
           wait 0.
         }
       }
-      ELSE systemLog("Cached log "+cacheFile+" empty", me).
+      ELSE systemLog("Cached log "+cacheFile+" empty", "Logging").
     }
     core:volume:delete("/logCache/").
   }
 }
 
-IF hasModule("comms"){}
+IF hasModule("comms"){
   ON hasSignalKSC {
     IF hasSignalKSC dumpLogCache().
     RETURN TRUE.

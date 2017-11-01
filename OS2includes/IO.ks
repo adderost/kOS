@@ -1,7 +1,6 @@
 //CONFIG
 SET logToKSC TO TRUE.
 SET saveLocalLogs TO FALSE.
-SET me TO "IO".
 
 //DEPENDENCIES
 wantModule("comms").
@@ -16,13 +15,22 @@ FUNCTION systemLog{
 
 	IF saveLocalLogs safeLog(out, "/system.log").
 	IF hasModule("comms"){
-		IF hasLocalControl PRINT out.
+		IF hasLocalControl {
+			IF NOT hasModule("cli_display") PRINT out.
+			ELSE cli_print(out).
+		}
 		IF logToKSC AND hasSignalKSC{
-			IF NOT hasLocalControl PRINT out.
+			IF NOT hasLocalControl {
+				IF NOT hasModule("cli_display") PRINT out.
+				ELSE cli_print(out).
+			}
 			dumpSystemLog().
 		}
 	}
-	ELSE PRINT out.
+	ELSE {
+		IF NOT hasModule("cli_display") PRINT out.
+		ELSE cli_print(out).
+	} 
 }
 //DUMPS THE SYSTEM LOG TO KSC ARCHIVE
 FUNCTION dumpSystemLog{
@@ -35,7 +43,7 @@ FUNCTION dumpSystemLog{
 			}
 		}
 	}
-	ELSE systemLog("Unable to dump system log. Commsmodule not available", me).
+	ELSE systemLog("Unable to dump system log. Commsmodule not available", "IO").
 }
 //LOGS STUFF TO PATH. IF MEMORY IS FULL DELETE LOG AND START AGIAN.
 FUNCTION safeLog{
@@ -53,7 +61,7 @@ FUNCTION safeLog{
 				core:volume:delete("/logCache").
 			}
 		}
-		systemLog("Out of memory! New file ["+path+"]", me).
+		systemLog("Out of memory! New file ["+path+"]", "IO").
 		IF core:volume:freespace > (str:LENGTH + 1) LOG str TO (path).
 	}
 }

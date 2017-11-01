@@ -1,17 +1,13 @@
-//CONFIG
+//VARIABLES
 SET hasSignal TO FALSE.
 SET hasSignalKSC TO FALSE.
 SET hasLocalControl TO FALSE.
-SET me TO "Comms".
-
-//TIMER
-LOCK timer TO ROUND(TIME:SECONDS - systemBootTime).
 
 //MODULE
 ON hasSignal {
 	IF hasModule("IO"){
-		IF hasSignal systemLog("Communications established", me).	
-		ELSE systemLog("Communications lost", me).
+		IF hasSignal systemLog("Communications established","Comms").	
+		ELSE systemLog("Communications lost","Comms").
 	}
 	RETURN TRUE.
 }
@@ -19,16 +15,16 @@ ON hasSignalKSC {
 	IF hasModule("IO"){
 		IF hasSignalKSC {
 			IF logToKSC dumpSystemLog().
-			systemLog("Connection to ksc established", me).	
+			systemLog("Connection to ksc established","Comms").	
 		}
-		ELSE systemLog("Connection to ksc lost", me).
+		ELSE systemLog("Connection to ksc lost","Comms").
 	}
 	RETURN TRUE.
 }
 ON hasLocalControl {
 	IF hasModule("IO"){
-		IF hasLocalControl systemLog("Local control established", me).	
-		ELSE systemLog("Local control established lost", me).
+		IF hasLocalControl systemLog("Local control established","Comms").	
+		ELSE systemLog("Local control established lost","Comms").
 	}
 	RETURN TRUE.
 }
@@ -41,7 +37,7 @@ ON timer {
 FUNCTION checkSignal {
 	IF addons:available("RT") SET remoteConnection TO addons:RT.
 	ELSE {
-		IF hasModule("IO") systemLog("Fatal error: No radiomodule available", me).
+		IF hasModule("IO") systemLog("Fatal error: No radiomodule available","Comms").
 		IF hasModule("system") shutdownSystem().
 	}
 	IF remoteConnection:HASKSCCONNECTION(SHIP) SET hasSignalKSC TO TRUE.
