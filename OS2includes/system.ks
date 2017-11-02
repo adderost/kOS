@@ -2,6 +2,7 @@
 
 //DEPENDENCIES
 wantModule("IO").
+wantModule("resources").
 
 //MODULE
 //SHUTS DOWN SYSTEM AND ATTEMPTS LOGDUMP

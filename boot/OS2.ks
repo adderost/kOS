@@ -97,6 +97,8 @@ UNTIL systemInitialized {
 wantModule("cli_display").
 startDisplay().
 
+
+
 SET i to 0.
 UNTIL NOT systeminitialized {
 	wait 0. //Placeholder action loop

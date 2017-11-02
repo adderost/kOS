@@ -1,5 +1,5 @@
 //CONFIG	
-SET displayWidth TO ROUND(terminal:width / 2). //Make room for border
+SET displayWidth TO ROUND(terminal:width / 2).
 SET displayHeight TO 15.
 
 //DEPENDENCIES
@@ -38,7 +38,7 @@ FUNCTION updateDisplay {
 
 	IF hasSignalKSC OR hasLocalControl {
 
-		SET row TO renderBox(row, "System info", cli_gauges).
+		SET row TO renderBox(row, "System info", cli_render_gauges()).
 
 		SET new_log_length TO (displayHeight - row).
 		IF new_log_length <> cli_log_length SET cli_log_updated TO TRUE.
@@ -88,10 +88,39 @@ FUNCTION repeatString {
 }
 
 FUNCTION cli_add_gauge {
-	PARAMETER variable.
+	PARAMETER value IS "Separator".
+	PARAMETER title IS "Value".
 	PARAMETER min IS 0.
 	PARAMETER max IS 1.
-	PARAMETER title IS "Value".
+
+	SET gauge TO LEXICON().
+	gauge:ADD("value", value).
+	gauge:ADD("title", title).
+	gauge:ADD("min", min).
+	gauge:ADD("max", max).
+
+	cli_gauges:ADD(gauge).
+}
+
+FUNCTION cli_render_gauges{
+	SET gaugewidth TO ROUND(displayWidth/2)-4.
+	SET out TO LIST().
+	FOR gauge IN cli_gauges{
+		IF gauge["value"] <> "Separator" {
+			SET value TO gauge["value"]:CALL.
+			SET postscript TO "".
+			IF gauge["min"] = 0 AND gauge["max"] = 1{
+				SET postscript TO (ROUND(value,2)*100) +"%".
+			}
+			SET meterFill  TO (ROUND(gaugewidth*(value/(gauge["max"]-gauge["min"])))).
+			SET meterEmpty TO (ROUND(gaugewidth*(1-(value/(gauge["max"]-gauge["min"]))))).
+			SET str TO "┃" + repeatString("█", meterFill ) + repeatString(" ", meterEmpty) + "┃ " + gauge["title"]+ " "+postscript.
+			out:ADD(str).
+		}
+		ELSE out:ADD(gauge["title"]).
+	}
+
+	RETURN out.
 }
 
 FUNCTION cli_print {
