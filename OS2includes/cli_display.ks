@@ -1,5 +1,5 @@
 //CONFIG	
-SET displayWidth TO ROUND(terminal:width / 2).
+SET displayWidth TO ROUND(terminal:width).
 SET displayHeight TO 15.
 
 //DEPENDENCIES
