@@ -1,6 +1,6 @@
 //CONFIG
-SET saveLocalLogs TO FALSE.
-SET printToSyslog TO TRUE.
+SET logging_saveLocalLogs TO FALSE.
+SET logging_printToSyslog TO TRUE.
 
 //DEPENDENCIES
 needModule("IO").
@@ -11,9 +11,9 @@ FUNCTION output {
   PARAMETER text.
   PARAMETER logFile IS "output.log".
   SET logStr TO "[" +round(timer)+ "] " + text.
-  IF saveLocalLogs safeLog(logStr, ("/log/"+logFile)).
+  IF logging_saveLocalLogs safeLog(logStr, ("/log/"+logFile)).
   outputToArchive(logStr, logfile).
-  IF printToSyslog systemLog("[-logFile-] "+logStr).
+  IF logging_printToSyslog systemLog("[-logFile-] "+logStr).
 }
 
 FUNCTION outputToArchive {
