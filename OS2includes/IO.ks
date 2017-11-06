@@ -24,7 +24,7 @@ FUNCTION log_system{
 				IF NOT hasModule("cli_display") PRINT out.
 				ELSE cli_print(out).
 			}
-			dumplog_system().
+			io_logdump().
 		}
 	}
 	ELSE {
@@ -33,7 +33,7 @@ FUNCTION log_system{
 	} 
 }
 //DUMPS THE SYSTEM LOG TO KSC ARCHIVE
-FUNCTION dumplog_system{
+FUNCTION io_logdump{
 	IF hasModule("comms"){
 		IF comms_hasSignalKSC{
 			IF core:volume:exists("/system.log"){
