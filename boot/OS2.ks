@@ -6,9 +6,10 @@ SET saveLocalModules TO FALSE.
 
 //SIGNALS
 SET systemInitialized TO FALSE.
+SET systemInterrupt TO FALSE.
 
 //TIMER (Fires every tenth of a second)
-LOCK timer TO ROUND(TIME:SECONDS - systemBootTime,1).
+LOCK timer TO ROUND(TIME:SECONDS - systemBootTime).
 
 //STATIC VARIABLES
 SET systemBootTime TO TIME:SECONDS.
@@ -94,17 +95,12 @@ UNTIL systemInitialized {
 	wait 0.
 }
 
-wantModule("cli_display").
-startDisplay().
-
-
-
-SET i to 0.
-UNTIL NOT systeminitialized {
-	wait 0. //Placeholder action loop
-	SET i TO i + 1.
-	IF i > 50 {
-		log_system("Time is: "+ROUND(TIME:SECONDS), "OS").
-		SET i TO 0.
-	}
+//Download and run operations.
+needModule("operations").
+operations_load().
+ON timer {
+	log_system("Tick","OS").
+	operations_run().
+	IF NOT systemInterrupt RETURN TRUE.
+	RETURN TRUE.
 }

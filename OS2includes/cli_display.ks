@@ -1,6 +1,6 @@
 //CONFIG	
 SET displayWidth TO ROUND(terminal:width).
-SET displayHeight TO 30.
+SET displayHeight TO 15.
 
 //DEPENDENCIES
 needModule("comms").
@@ -17,13 +17,13 @@ SET cli_latest_log TO "".
 
 //MODULE
 FUNCTION startDisplay {
-	PRINT "Display width is "+displayWidth.
-
-	SET cli_displayActive TO TRUE.
-	clearscreen.
-	ON timer {
-		updateDisplay().
-		IF cli_displayActive RETURN TRUE.
+	IF NOT cli_displayActive{
+		SET cli_displayActive TO TRUE.
+		clearscreen.
+		ON timer {
+			updateDisplay().
+			IF cli_displayActive RETURN TRUE.
+		}
 	}
 }
 
@@ -36,7 +36,7 @@ FUNCTION updateDisplay {
 	SET iterator TO 0.
 	SET row TO 0.
 
-	IF hasSignalKSC OR hasLocalControl {
+	IF comms_hasSignalKSC OR comms_hasLocalControl {
 
 		SET row TO renderBox(row, "System info", cli_render_gauges()).
 
@@ -116,7 +116,7 @@ FUNCTION cli_render_gauges{
 			SET str TO "┃" + repeatString("█", meterFill ) + repeatString(" ", meterEmpty) + "┃ " + gauge["title"]+ " "+postscript.
 			out:ADD(str).
 		}
-		ELSE out:ADD(gauge["title"]).
+		ELSE out:ADD(" "+gauge["title"]).
 	}
 	RETURN out.
 }

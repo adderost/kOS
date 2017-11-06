@@ -3,6 +3,8 @@ SET comms_hasSignal TO FALSE.
 SET comms_hasSignalKSC TO FALSE.
 SET comms_hasLocalControl TO FALSE.
 
+SET comms_logToKSC TO TRUE.
+
 //MODULE
 ON comms_hasSignal {
 	IF hasModule("IO"){
@@ -14,10 +16,10 @@ ON comms_hasSignal {
 ON comms_hasSignalKSC {
 	IF hasModule("IO"){
 		IF comms_hasSignalKSC {
-			IF logToKSC dumplog_system().
-			log_system("Connection to ksc established","Comms").	
+			IF comms_logToKSC io_logdump().
+			log_system("Connection to KSC established","Comms").	
 		}
-		ELSE log_system("Connection to ksc lost","Comms").
+		ELSE log_system("Connection to KSC lost","Comms").
 	}
 	RETURN TRUE.
 }
@@ -42,7 +44,7 @@ FUNCTION checkSignal {
 	}
 	IF remoteConnection:HASKSCCONNECTION(SHIP) SET comms_hasSignalKSC TO TRUE.
 	ELSE SET comms_hasSignalKSC TO FALSE.
-	IF remoteConnection:comms_hasLocalControl(SHIP) SET comms_hasLocalControl TO TRUE.
+	IF remoteConnection:hasLocalControl(SHIP) SET comms_hasLocalControl TO TRUE.
 	ELSE SET comms_hasLocalControl TO FALSE.
 	IF remoteConnection:HASCONNECTION(SHIP) SET comms_hasSignal TO TRUE.
 	ELSE SET comms_hasSignal TO FALSE.

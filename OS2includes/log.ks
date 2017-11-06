@@ -13,7 +13,7 @@ FUNCTION log_output {
   SET logStr TO "[" +round(timer)+ "] " + text.
   IF log_saveLocalLogs io_safeLog(logStr, ("/log/"+logFile)).
   log_toArchive(logStr, logfile).
-  IF log_printToSyslog log_system("[-logFile-] "+logStr).
+  IF log_printToSyslog log_system("[-"+logFile+"-] "+logStr, "Log").
 }
 
 FUNCTION log_toArchive {
@@ -21,7 +21,7 @@ FUNCTION log_toArchive {
   PARAMETER logFile.
   IF hasModule("comms"){
     IF comms_hasSignal{
-      IF NOT archive:exists("/Vessels/" + ship:name + "/log/"+logFile) archive:create("/Vessels" + ship:name + "/log/"+logFile).
+      IF NOT archive:exists("/Vessels/" + ship:name + "/log/"+logFile) archive:create("/Vessels/" + ship:name + "/log/"+logFile).
       archive:open("/Vessels/" + ship:name + "/log/"+logFile):writeln(str).
     }
     ELSE{

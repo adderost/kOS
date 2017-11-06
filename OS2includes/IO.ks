@@ -1,6 +1,6 @@
 //CONFIG
 SET io_logToKSC TO TRUE.
-SET io_saveLocalLogs TO FALSE.
+SET io_saveLocalLogs TO TRUE.
 
 //DEPENDENCIES
 wantModule("comms").
@@ -51,7 +51,8 @@ FUNCTION io_safeLog{
 	PARAMETER path.
 	SET str TO "["+timer+"]	"+str. 
 	IF core:volume:freespace > (str:LENGTH + 1) {
-		LOG str TO (path).
+		IF NOT core:volume:exists(path) core:volume:create(path).
+		core:volume:open(path):writeln(str).
 	}
 	ELSE {
 		IF core:volume:exists(path) core:volume:delete(path).

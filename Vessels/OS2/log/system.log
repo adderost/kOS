@@ -1,0 +1,160 @@
+[0.4]	[Comms] Communications established
+
+[0.5]	[Comms] Connection to KSC established
+
+[0.5]	[OS2] Loaded module: IO
+
+[1.4]	[OS2] Loaded module: cli_display
+
+[8.1]	[OS2] Loaded module: resources
+
+[13.6]	[OS2] Loaded module: system
+
+[21.1]	[OS2] NOTICE: Unable to load optional module 'saveStates'
+
+[25.2]	[OS2] SYSTEM BOOTED SUCCESSFULLY
+
+[39.6]	[OS2] Loaded module: log
+
+[49.1]	[OS2] Loaded module: operations
+
+[0.4]	[Comms] Communications established
+
+[0.5]	[Comms] Connection to KSC established
+
+[0.5]	[OS2] Loaded module: IO
+
+[1.3]	[OS2] Loaded module: cli_display
+
+[13.9]	[OS2] Loaded module: resources
+
+[19.4]	[OS2] Loaded module: system
+
+[26.9]	[OS2] NOTICE: Unable to load optional module 'saveStates'
+
+[31]	[OS2] SYSTEM BOOTED SUCCESSFULLY
+
+[45.4]	[OS2] Loaded module: log
+
+[54.9]	[OS2] Loaded module: operations
+
+[62.9]	[UNKNOWN] [-logFile-] [60] Loading operations #0
+
+[72.5]	[UNKNOWN] [-logFile-] [71] Ops ops_0.ks downloaded successfully
+
+[0.6]	[Comms] Communications established
+
+[0.6]	[Comms] Connection to KSC established
+
+[0.6]	[OS2] Loaded module: IO
+
+[2.1]	[OS2] Loaded module: cli_display
+
+[9]	[OS2] Loaded module: resources
+
+[14.6]	[OS2] Loaded module: system
+
+[22]	[OS2] NOTICE: Unable to load optional module 'saveStates'
+
+[26.1]	[OS2] SYSTEM BOOTED SUCCESSFULLY
+
+[40.5]	[OS2] Loaded module: log
+
+[50]	[OS2] Loaded module: operations
+
+[54.6]	[Operations] No ops found for this vessel
+
+[0.4]	[Comms] Communications established
+
+[0.5]	[Comms] Connection to KSC established
+
+[0.5]	[OS2] Loaded module: IO
+
+[1.7]	[OS2] Loaded module: cli_display
+
+[14.3]	[OS2] Loaded module: resources
+
+[21.5]	[OS2] Loaded module: system
+
+[28.9]	[OS2] NOTICE: Unable to load optional module 'saveStates'
+
+[34.8]	[OS2] SYSTEM BOOTED SUCCESSFULLY
+
+[54.2]	[OS2] Loaded module: log
+
+[63.7]	[OS2] Loaded module: operations
+
+[71.7]	[Log] [-operations.log-] [70] Loading operations #0
+
+[81.3]	[Log] [-operations.log-] [80] Ops ops_0.ks downloaded successfully
+
+[0.5]	[Comms] Communications established
+
+[0.6]	[Comms] Connection to KSC established
+
+[0.6]	[OS2] Loaded module: IO
+
+[1.9]	[OS2] Loaded module: cli_display
+
+[13.5]	[OS2] Loaded module: resources
+
+[19]	[OS2] Loaded module: system
+
+[26.5]	[OS2] NOTICE: Unable to load optional module 'saveStates'
+
+[30.6]	[OS2] SYSTEM BOOTED SUCCESSFULLY
+
+[45]	[OS2] Loaded module: log
+
+[54.5]	[OS2] Loaded module: operations
+
+[59.1]	[Operations] No ops found for this vessel
+
+[0.4]	[Comms] Communications established
+
+[0.5]	[Comms] Connection to KSC established
+
+[0.5]	[OS2] Loaded module: IO
+
+[1.7]	[OS2] Loaded module: cli_display
+
+[8.6]	[OS2] Loaded module: resources
+
+[15.8]	[OS2] Loaded module: system
+
+[23.3]	[OS2] NOTICE: Unable to load optional module 'saveStates'
+
+[29.1]	[OS2] SYSTEM BOOTED SUCCESSFULLY
+
+[48.5]	[OS2] Loaded module: log
+
+[58]	[OS2] Loaded module: operations
+
+[66]	[Log] [-operations.log-] [64] Loading operations #0
+
+[75.6]	[Log] [-operations.log-] [74] Ops ops_0.ks downloaded successfully
+
+[1]	[Comms] Communications established
+
+[1]	[Comms] Connection to KSC established
+
+[1]	[OS2] Loaded module: IO
+
+[2]	[OS2] Loaded module: cli_display
+
+[2]	[OS2] Loaded module: resources
+
+[2]	[OS2] Loaded module: system
+
+[2]	[OS2] NOTICE: Unable to load optional module 'saveStates'
+
+[2]	[OS2] SYSTEM BOOTED SUCCESSFULLY
+
+[18]	[OS2] Loaded module: log
+
+[25]	[OS2] Loaded module: operations
+
+[33]	[Log] [-operations.log-] [32] Loading operations #0
+
+[41]	[Log] [-operations.log-] [40] Ops ops_0.ks downloaded successfully
+
