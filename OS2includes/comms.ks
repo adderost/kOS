@@ -23,8 +23,8 @@ ON comms_hasSignalKSC {
 }
 ON comms_hasLocalControl {
 	IF hasModule("IO"){
-		IF comms_hasLocalControl systemLog("Local control established","Comms").	
-		ELSE systemLog("Local control established lost","Comms").
+		IF comms_hasLocalControl systemLog("Local control active","Comms").	
+		ELSE systemLog("Local control inactive","Comms").
 	}
 	RETURN TRUE.
 }
