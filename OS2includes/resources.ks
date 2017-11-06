@@ -1,8 +1,11 @@
 //CONFIG
+SET resources_showDisplay TO TRUE.
+
 SET resources_percentElectriccharge TO 0.
 SET resources_percentLiquidfuel TO 0.
 SET resources_percentOxidizer TO 0.
 SET resources_percentMonopropellant TO 0.
+SET resources_percentStorage TO 0.
 
 SET resources_electricIndex TO 0.
 SET resources_liquidIndex TO 0.
@@ -20,13 +23,20 @@ ON resources_numAvailRsrc {
 }
 
 ON hasModule("cli_display") {
-	IF hasModule("cli_display"){
-		cli_add_gauge(getresources_percentElectriccharge@, "Electric charge").
+	IF hasModule("cli_display") AND resources_showDisplay{
+		cli_add_gauge("Separator", "Propellants").
 		cli_add_gauge(getresources_percentLiquidfuel@, "Liquid fuel").
 		cli_add_gauge(getresources_percentOxidizer@, "Oxidizer").
 		cli_add_gauge(getresources_percentMonopropellant@, "Monopropellant").
+		cli_add_gauge("Separator", "Electronics and system resources").
+		cli_add_gauge(getresources_percentElectriccharge@, "Electric charge").
+		cli_add_gauge(getresources_percentStorage@, "System memory").
 	}
 	ELSE RETURN TRUE.
+}
+
+FUNCTION getresources_percentStorage {
+	RETURN (CORE:VOLUME:FREESPACE / CORE:VOLUME:CAPACITY).
 }
 
 FUNCTION getresources_percentElectriccharge {
