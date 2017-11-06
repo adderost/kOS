@@ -1,6 +1,6 @@
 //CONFIG
-SET logToKSC TO TRUE.
-SET saveLocalLogs TO FALSE.
+SET io_logToKSC TO TRUE.
+SET io_saveLocalLogs TO FALSE.
 
 //DEPENDENCIES
 wantModule("comms").
@@ -13,14 +13,14 @@ FUNCTION systemLog{
 
 	SET out TO "["+sender+"] "+out.
 
-	IF saveLocalLogs safeLog(out, "/system.log").
+	IF io_saveLocalLogs safeLog(out, "/system.log").
 	IF hasModule("comms"){
-		IF hasLocalControl {
+		IF comms_hasLocalControl {
 			IF NOT hasModule("cli_display") PRINT out.
 			ELSE cli_print(out).
 		}
-		IF logToKSC AND hasSignalKSC{
-			IF NOT hasLocalControl {
+		IF io_logToKSC AND comms_hasSignalKSC{
+			IF NOT comms_hasLocalControl {
 				IF NOT hasModule("cli_display") PRINT out.
 				ELSE cli_print(out).
 			}
@@ -35,7 +35,7 @@ FUNCTION systemLog{
 //DUMPS THE SYSTEM LOG TO KSC ARCHIVE
 FUNCTION dumpSystemLog{
 	IF hasModule("comms"){
-		IF hasSignalKSC{
+		IF comms_hasSignalKSC{
 			IF core:volume:exists("/system.log"){
 				SET logstr TO OPEN("/system.log"):READALL:STRING.
 				LOG logstr TO "0:/Vessels/"+SHIP:NAME+"/log/system.log".

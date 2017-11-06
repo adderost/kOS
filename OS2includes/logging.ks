@@ -20,7 +20,7 @@ FUNCTION outputToArchive {
   PARAMETER str.
   PARAMETER logFile.
   IF hasModule("comms"){
-    IF hasSignalKSC{
+    IF comms_hasSignal{
       IF NOT archive:exists("/Vessels/" + ship:name + "/log/"+logFile) archive:create("/Vessels" + ship:name + "/log/"+logFile).
       archive:open("/Vessels/" + ship:name + "/log/"+logFile):writeln(str).
     }
@@ -51,8 +51,8 @@ FUNCTION dumpLogCache {
 }
 
 IF hasModule("comms"){
-  ON hasSignalKSC {
-    IF hasSignalKSC dumpLogCache().
+  ON comms_hasSignalKSC{
+    IF comms_hasSignalKSC dumpLogCache().
     RETURN TRUE.
   }
 }

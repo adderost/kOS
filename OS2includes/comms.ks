@@ -1,19 +1,19 @@
 //VARIABLES
-SET hasSignal TO FALSE.
-SET hasSignalKSC TO FALSE.
-SET hasLocalControl TO FALSE.
+SET comms_hasSignal TO FALSE.
+SET comms_hasSignalKSC TO FALSE.
+SET comms_hasLocalControl TO FALSE.
 
 //MODULE
-ON hasSignal {
+ON comms_hasSignal {
 	IF hasModule("IO"){
-		IF hasSignal systemLog("Communications established","Comms").	
+		IF comms_hasSignal systemLog("Communications established","Comms").	
 		ELSE systemLog("Communications lost","Comms").
 	}
 	RETURN TRUE.
 }
-ON hasSignalKSC {
+ON comms_hasSignalKSC {
 	IF hasModule("IO"){
-		IF hasSignalKSC {
+		IF comms_hasSignalKSC {
 			IF logToKSC dumpSystemLog().
 			systemLog("Connection to ksc established","Comms").	
 		}
@@ -21,9 +21,9 @@ ON hasSignalKSC {
 	}
 	RETURN TRUE.
 }
-ON hasLocalControl {
+ON comms_hasLocalControl {
 	IF hasModule("IO"){
-		IF hasLocalControl systemLog("Local control established","Comms").	
+		IF comms_hasLocalControl systemLog("Local control established","Comms").	
 		ELSE systemLog("Local control established lost","Comms").
 	}
 	RETURN TRUE.
@@ -40,12 +40,12 @@ FUNCTION checkSignal {
 		IF hasModule("IO") systemLog("Fatal error: No radiomodule available","Comms").
 		IF hasModule("system") shutdownSystem().
 	}
-	IF remoteConnection:HASKSCCONNECTION(SHIP) SET hasSignalKSC TO TRUE.
-	ELSE SET hasSignalKSC TO FALSE.
-	IF remoteConnection:HASLOCALCONTROL(SHIP) SET hasLocalControl TO TRUE.
-	ELSE SET hasLocalControl TO FALSE.
-	IF remoteConnection:HASCONNECTION(SHIP) SET hasSignal TO TRUE.
-	ELSE SET hasSignal TO FALSE.
+	IF remoteConnection:HASKSCCONNECTION(SHIP) SET comms_hasSignalKSC TO TRUE.
+	ELSE SET comms_hasSignalKSC TO FALSE.
+	IF remoteConnection:comms_hasLocalControl(SHIP) SET comms_hasLocalControl TO TRUE.
+	ELSE SET comms_hasLocalControl TO FALSE.
+	IF remoteConnection:HASCONNECTION(SHIP) SET comms_hasSignal TO TRUE.
+	ELSE SET comms_hasSignal TO FALSE.
 }
 
 checkSignal().
