@@ -7,8 +7,8 @@ SET saveLocalModules TO FALSE.
 //SIGNALS
 SET systemInitialized TO FALSE.
 
-//TIMER (Fires every second)
-LOCK timer TO ROUND(TIME:SECONDS - systemBootTime).
+//TIMER (Fires every tenth of a second)
+LOCK timer TO ROUND(TIME:SECONDS - systemBootTime,1).
 
 //STATIC VARIABLES
 SET systemBootTime TO TIME:SECONDS.
@@ -25,7 +25,7 @@ FUNCTION bootSequence {
 	}
 
 	SET systemInitialized TO TRUE.
-	systemLog("SYSTEM BOOTED SUCCESSFULLY", "OS2").
+	log_system("SYSTEM BOOTED SUCCESSFULLY", "OS2").
 }
 
 FUNCTION loadModule{ //LOADS A MODULE INTO MEMORY
@@ -47,7 +47,7 @@ FUNCTION loadModule{ //LOADS A MODULE INTO MEMORY
 		IF moduleLoaded{
 			RUNPATH(modulePath).
 			SET loadedModules[module] TO TRUE.
-			IF hasModule("IO") systemLog("Loaded module: "+module, "OS2").
+			IF hasModule("IO") log_system("Loaded module: "+module, "OS2").
 			IF NOT saveLocalModules{
 				CORE:VOLUME:DELETE(modulePath).
 			}
@@ -74,7 +74,7 @@ FUNCTION wantModule{
 	PARAMETER clearCache IS FALSE.
 
 	IF NOT loadModule(module, clearCache){
-		IF hasModule("IO") systemLog("NOTICE: Unable to load optional module '"+module+"'", "OS2").
+		IF hasModule("IO") log_system("NOTICE: Unable to load optional module '"+module+"'", "OS2").
 		RETURN FALSE.
 	}
 	ELSE RETURN TRUE.
@@ -104,7 +104,7 @@ UNTIL NOT systeminitialized {
 	wait 0. //Placeholder action loop
 	SET i TO i + 1.
 	IF i > 50 {
-		systemLog("Time is: "+ROUND(TIME:SECONDS), "OS").
+		log_system("Time is: "+ROUND(TIME:SECONDS), "OS").
 		SET i TO 0.
 	}
 }

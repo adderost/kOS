@@ -7,13 +7,13 @@ wantModule("comms").
 
 //MODULE
 //LOGS SYSTEM MESSAGES. OUTPUTS TO TERMINAL IF AVAILABLE
-FUNCTION systemLog{
+FUNCTION log_system{
 	PARAMETER out.
 	PARAMETER sender IS "UNKNOWN".
 
 	SET out TO "["+sender+"] "+out.
 
-	IF io_saveLocalLogs safeLog(out, "/system.log").
+	IF io_saveLocalLogs io_safeLog(out, "/system.log").
 	IF hasModule("comms"){
 		IF comms_hasLocalControl {
 			IF NOT hasModule("cli_display") PRINT out.
@@ -24,7 +24,7 @@ FUNCTION systemLog{
 				IF NOT hasModule("cli_display") PRINT out.
 				ELSE cli_print(out).
 			}
-			dumpSystemLog().
+			dumplog_system().
 		}
 	}
 	ELSE {
@@ -33,7 +33,7 @@ FUNCTION systemLog{
 	} 
 }
 //DUMPS THE SYSTEM LOG TO KSC ARCHIVE
-FUNCTION dumpSystemLog{
+FUNCTION dumplog_system{
 	IF hasModule("comms"){
 		IF comms_hasSignalKSC{
 			IF core:volume:exists("/system.log"){
@@ -43,10 +43,10 @@ FUNCTION dumpSystemLog{
 			}
 		}
 	}
-	ELSE systemLog("Unable to dump system log. Commsmodule not available", "IO").
+	ELSE log_system("Unable to dump system log. Commsmodule not available", "IO").
 }
 //LOGS STUFF TO PATH. IF MEMORY IS FULL DELETE LOG AND START AGIAN.
-FUNCTION safeLog{
+FUNCTION io_safeLog{
 	PARAMETER str.
 	PARAMETER path.
 	SET str TO "["+timer+"]	"+str. 
@@ -61,7 +61,7 @@ FUNCTION safeLog{
 				core:volume:delete("/logCache").
 			}
 		}
-		systemLog("Out of memory! New file ["+path+"]", "IO").
+		log_system("Out of memory! New file ["+path+"]", "IO").
 		IF core:volume:freespace > (str:LENGTH + 1) LOG str TO (path).
 	}
 }

@@ -118,7 +118,6 @@ FUNCTION cli_render_gauges{
 		}
 		ELSE out:ADD(gauge["title"]).
 	}
-
 	RETURN out.
 }
 

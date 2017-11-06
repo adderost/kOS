@@ -1,22 +1,22 @@
 //CONFIG
-SET logging_saveLocalLogs TO FALSE.
-SET logging_printToSyslog TO TRUE.
+SET log_saveLocalLogs TO FALSE.
+SET log_printToSyslog TO TRUE.
 
 //DEPENDENCIES
 needModule("IO").
 wantModule("comms").
 
 //MODULE
-FUNCTION output {
+FUNCTION log_output {
   PARAMETER text.
   PARAMETER logFile IS "output.log".
   SET logStr TO "[" +round(timer)+ "] " + text.
-  IF logging_saveLocalLogs safeLog(logStr, ("/log/"+logFile)).
-  outputToArchive(logStr, logfile).
-  IF logging_printToSyslog systemLog("[-logFile-] "+logStr).
+  IF log_saveLocalLogs io_safeLog(logStr, ("/log/"+logFile)).
+  log_toArchive(logStr, logfile).
+  IF log_printToSyslog log_system("[-logFile-] "+logStr).
 }
 
-FUNCTION outputToArchive {
+FUNCTION log_toArchive {
   PARAMETER str.
   PARAMETER logFile.
   IF hasModule("comms"){
@@ -25,26 +25,26 @@ FUNCTION outputToArchive {
       archive:open("/Vessels/" + ship:name + "/log/"+logFile):writeln(str).
     }
     ELSE{
-      safeLog(text, "/logCache/"+logfile).
+      io_safeLog(text, "/logCache/"+logfile).
     }
   }
   ELSE{
-    safeLog(text, "/logCache/"+logfile).
+    io_safeLog(text, "/logCache/"+logfile).
   }
 }
 
-FUNCTION dumpLogCache {
+FUNCTION log_dumpCache {
   IF core:volume:exists("/logCache") {
     FOR cacheFile IN core:volume:open("/logCache"):list:values{
-      systemLog("Dumping cached log "+cacheFile, "Logging").
+      log_system("Dumping cached log "+cacheFile, "Logging").
       IF NOT core:volume:open("/logCache/"+cacheFile):readall:empty {
         SET cacheIterator to core:volume:open("/logCache/"+cacheFile):readall:iterator.
         UNTIL NOT cacheIterator:NEXT {
-          outputToArchive(cacheIterator:VALUE, cacheFile).
+          log_toArchive(cacheIterator:VALUE, cacheFile).
           wait 0.
         }
       }
-      ELSE systemLog("Cached log "+cacheFile+" empty", "Logging").
+      ELSE log_system("Cached log "+cacheFile+" empty", "Logging").
     }
     core:volume:delete("/logCache/").
   }
@@ -52,7 +52,7 @@ FUNCTION dumpLogCache {
 
 IF hasModule("comms"){
   ON comms_hasSignalKSC{
-    IF comms_hasSignalKSC dumpLogCache().
+    IF comms_hasSignalKSC log_dumpCache().
     RETURN TRUE.
   }
 }
