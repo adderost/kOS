@@ -1,13 +1,13 @@
 //CONFIG	
 SET displayWidth TO ROUND(terminal:width).
-SET displayHeight TO 15.
+SET displayHeight TO 30.
 
 //DEPENDENCIES
 needModule("comms").
 
 //VARIABLES
 SET cli_displayActive TO FALSE.
-SET numUpdates TO 0.
+SET cli_numUpdates TO 0.
 SET cli_gauges TO LIST().
 SET cli_log TO LIST().
 
@@ -32,7 +32,7 @@ FUNCTION stopDisplay {
 }
 
 FUNCTION updateDisplay {
-	SET numUpdates TO numUpdates + 1.
+	SET cli_numUpdates TO cli_numUpdates + 1.
 	SET iterator TO 0.
 	SET row TO 0.
 
@@ -60,7 +60,6 @@ FUNCTION renderBox {
 	PARAMETER title IS "".
 	PARAMETER content IS LIST().
 	
-
 	SET returnval TO (row+content:length+2).
 
 	PRINT ("┏──" + title + repeatString("─", (displayWidth-title:LENGTH-4)) + "┓") AT(0,row).
