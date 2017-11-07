@@ -49,7 +49,6 @@ FUNCTION getresources_percentMonopropellant {
 
 FUNCTION resources_updateResourcelist{
 	SET resourceIterator TO 0.
-	PRINT ship:resources.
 	SET resources_electricIndex TO -1.
 	SET resources_liquidIndex TO -1.
 	SET resources_oxideIndex TO -1.

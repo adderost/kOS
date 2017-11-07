@@ -28,7 +28,7 @@ FUNCTION bootSequence {
 	}
 
 	SET systemInitialized TO TRUE.
-	log_system("SYSTEM BOOTED SUCCESSFULLY", "OS2").
+	log_system("System has booted up successfully", "OS").
 }
 
 FUNCTION loadModule{ //LOADS A MODULE INTO MEMORY
@@ -50,7 +50,7 @@ FUNCTION loadModule{ //LOADS A MODULE INTO MEMORY
 		IF moduleLoaded{
 			RUNPATH(modulePath).
 			SET loadedModules[module] TO TRUE.
-			IF hasModule("IO") log_system("Loaded module: "+module, "OS2").
+			IF hasModule("IO") log_system("Loaded module: "+module, "OS").
 			IF NOT saveLocalModules{
 				CORE:VOLUME:DELETE(modulePath).
 			}
@@ -66,7 +66,7 @@ FUNCTION needModule{
 	PARAMETER clearCache IS FALSE.
 
 	IF NOT loadModule(module, clearCache){
-		systemInterrupt("FATAL ERROR: Unable to load required module '"+module+"'", "OS2").
+		systemInterrupt("FATAL ERROR: Unable to load required module '"+module+"'", "OS").
 		RETURN FALSE.
 	}
 	ELSE RETURN TRUE.
@@ -77,7 +77,7 @@ FUNCTION wantModule{
 	PARAMETER clearCache IS FALSE.
 
 	IF NOT loadModule(module, clearCache){
-		IF hasModule("IO") log_system("NOTICE: Unable to load optional module '"+module+"'", "OS2").
+		IF hasModule("IO") log_system("NOTICE: Unable to load optional module '"+module+"'", "OS").
 		RETURN FALSE.
 	}
 	ELSE RETURN TRUE.
@@ -97,7 +97,9 @@ UNTIL systemInitialized {
 	wait 0.
 }
 
+log_system("Entering operations main loop", "OS").
 UNTIL systemInterrupt {
+	IF hasModule("cli_display") updateDisplay().
 	operations_run().
 	wait 0.
 }

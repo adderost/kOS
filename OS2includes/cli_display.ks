@@ -15,15 +15,15 @@ SET cli_log_updated TO FALSE.
 SET cli_log_length TO 0.
 SET cli_latest_log TO "".
 
+SET cli_logBuffer TO "".
+SET cli_gaugeBuffer TO "".
+
 //MODULE
 FUNCTION startDisplay {
 	IF NOT cli_displayActive{
 		SET cli_displayActive TO TRUE.
 		clearscreen.
-		ON timer {
-			updateDisplay().
-			IF cli_displayActive RETURN TRUE.
-		}
+		updateDisplay().
 	}
 }
 
@@ -38,39 +38,42 @@ FUNCTION updateDisplay {
 
 	IF comms_hasSignalKSC OR comms_hasLocalControl {
 
-		SET row TO renderBox(row, "System info", cli_render_gauges()).
+		SET gauges TO renderBox("System info", cli_render_gauges()).
+		IF gauges <> cli_gaugeBuffer {
+			SET cli_gaugeBuffer TO gauges.
+			PRINT cli_gaugeBuffer AT(0,row).
+		}
+		SET row TO row+CEILING(cli_gaugeBuffer:LENGTH/displayWidth).
 
 		SET new_log_length TO (displayHeight - row).
 		IF new_log_length <> cli_log_length SET cli_log_updated TO TRUE.
 		SET cli_log_length TO new_log_length.
 
-		IF cli_log_updated AND cli_log_length > 2 {
+		IF cli_log_updated AND cli_log_length > 0 {
 			SET logStart TO (cli_log:LENGTH - cli_log_length).
 			IF logStart < 0 SET logStart TO 0.
 			SET logPart TO cli_log:SUBLIST(logStart, cli_log_length).
-			SET row TO renderbox(row, "Log", logPart).
+			SET cli_logBuffer TO renderbox("Log", logPart).
 			SET cli_log TO logPart.
 			SET cli_log_updated TO FALSE.
 		}
+		PRINT cli_logBuffer AT (0,row).
 	}
 }
 
 FUNCTION renderBox {
-	PARAMETER row.
 	PARAMETER title IS "".
 	PARAMETER content IS LIST().
-	
-	SET returnval TO (row+content:length+2).
 
-	PRINT ("┏──" + title + repeatString("─", (displayWidth-title:LENGTH-4)) + "┓") AT(0,row).
-	FOR entry IN content {
-		SET row TO row + 1.
-		SET entry TO entry+repeatstring(" ", displayWidth-entry:LENGTH-2).
-		PRINT "┃" + entry + "┃" AT(0,row).
+	SET output TO "".
+
+	SET output TO ("┏──" + title + repeatString("─", (displayWidth-title:LENGTH-4)) + "┓").
+	FOR entry IN CONTENT {
+		SET output TO (output + "┃" + entry + repeatString(" ", displayWidth-2-entry:LENGTH) + "┃").
 	}
-	PRINT ("┗" + repeatString("─", (displayWidth-2)) + "┛") AT(0,row+1).
+	SET output TO (output + ("┗" + repeatString("─", (displayWidth-2)) + "┛") ).
 
-	RETURN returnval.
+	RETURN output.
 }
 
 FUNCTION repeatString {
@@ -127,6 +130,7 @@ FUNCTION cli_print {
 		cli_log:ADD(out).
 		SET cli_log_updated TO TRUE.
 		SET cli_latest_log TO out.
+		updateDisplay().
 	}
 	ELSE PRINT out.
 }

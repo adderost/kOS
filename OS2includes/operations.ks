@@ -35,9 +35,6 @@ FUNCTION operations_load {
 		}
 		ELSE{
 			log_system("No ops found for this vessel", "Operations").
-			ON archive:exists("/Vessels/"+ship:name+"/ops.ks"){
-				operations_load().
-			}
 		}
 	}
 	ELSE{
@@ -61,12 +58,12 @@ FUNCTION operations_read{
 
 FUNCTION operations_add{
 	PARAMETER ops.
-	IF ops:typename = "KOSDelegate" operations_opsQueue:ADD(ops).
+	IF ops:typename = "UserDelegate" operations_opsQueue:ADD(ops).
 }
 
 FUNCTION operations_run {
-	FOR operation IN operations_opsQueue {
-		operations:call().
-	}
 	IF operations_opsQueue:LENGTH <= 0 operations_add(operations_load@).
+	FOR operation IN operations_opsQueue {
+		operation:call().
+	}
 }
