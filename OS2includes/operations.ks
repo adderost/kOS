@@ -56,6 +56,7 @@ FUNCTION operations_read{
 		IF hasModule("log") log_output("Operations file doesn't exist. "+opsFilename, "operations.log").
 		ELSE log_system("Operations file doesn't exist. "+opsFilename, "Operations").
 	}
+	SET operations_opsCounter TO operations_opsCounter + 1.
 }
 
 FUNCTION operations_add{
