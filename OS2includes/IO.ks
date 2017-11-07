@@ -37,8 +37,10 @@ FUNCTION io_logdump{
 	IF hasModule("comms"){
 		IF comms_hasSignalKSC{
 			IF core:volume:exists("/system.log"){
-				SET logstr TO OPEN("/system.log"):READALL:STRING.
-				LOG logstr TO "0:/Vessels/"+SHIP:NAME+"/log/system.log".
+				SET logstr TO OPEN("/system.log"):READALL:ITERATOR.
+				UNTIL NOT logstr:NEXT {
+					ARCHIVE:OPEN("/Vessels/"+SHIP:NAME+"/log/system.log"):writeln(logstr:VALUE).
+				}
 				DELETEPATH("/system.log").
 			}
 		}

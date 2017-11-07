@@ -98,9 +98,9 @@ UNTIL systemInitialized {
 //Download and run operations.
 needModule("operations").
 operations_load().
-ON timer {
-	log_system("Tick","OS").
+
+UNTIL systemInterrupt {
 	operations_run().
-	IF NOT systemInterrupt RETURN TRUE.
-	RETURN TRUE.
 }
+
+systemInterrupt("SYSTEM ENTERED INTERRUPT STATE. REBOOT").
