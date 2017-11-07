@@ -1,6 +1,7 @@
 //CONFIG
 SET operations_opsCounter TO 0.
 SET operations_opsQueue TO LIST().
+SET operations_opsRun TO LIST().
 
 //DEPENDENCIES
 needModule("IO").
@@ -30,11 +31,12 @@ FUNCTION operations_load {
 				ELSE{
 					IF hasModule("log") log_output("Ops "+opsFilename+" downloaded successfully", "operations.log").
 					ELSE log_system("Ops "+opsFilename+" downloaded successfully", "Operations").
+					operations_add(operations_read@).
 				}
 			}
 		}
 		ELSE{
-			log_system("No ops found for this vessel", "Operations").
+			
 		}
 	}
 	ELSE{
@@ -62,8 +64,10 @@ FUNCTION operations_add{
 }
 
 FUNCTION operations_run {
-	IF operations_opsQueue:LENGTH <= 0 operations_add(operations_load@).
-	FOR operation IN operations_opsQueue {
+	SET operations_opsRun TO operations_opsQueue:COPY.
+	SET operations_opsQueue TO LIST().
+	IF operations_opsRun:LENGTH <= 0 operations_add(operations_load@).
+	FOR operation IN operations_opsRun {
 		operation:call().
 	}
 }
