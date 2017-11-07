@@ -39,6 +39,7 @@ FUNCTION io_logdump{
 			IF core:volume:exists("/system.log"){
 				SET logstr TO OPEN("/system.log"):READALL:ITERATOR.
 				UNTIL NOT logstr:NEXT {
+					IF NOT ARCHIVE:EXISTS("/Vessels/"+SHIP:NAME+"/log/system.log") ARCHIVE:CREATE("/Vessels/"+SHIP:NAME+"/log/system.log").
 					ARCHIVE:OPEN("/Vessels/"+SHIP:NAME+"/log/system.log"):writeln(logstr:VALUE).
 				}
 				DELETEPATH("/system.log").
