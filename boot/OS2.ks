@@ -1,5 +1,6 @@
 clearscreen.
 PRINT "System startup".
+
 //CONFIGS
 SET includesDir TO "/OS2includes/".
 SET saveLocalModules TO FALSE.
@@ -8,7 +9,7 @@ SET saveLocalModules TO FALSE.
 SET systemInitialized TO FALSE.
 SET systemInterrupt TO FALSE.
 
-//TIMER (Fires every tenth of a second)
+//TIMER (Fires every second)
 LOCK timer TO ROUND(TIME:SECONDS - systemBootTime).
 
 //STATIC VARIABLES
@@ -19,6 +20,7 @@ DECLARE GLOBAL loadedModules TO lexicon().
 
 FUNCTION bootSequence {
 	needModule("system").
+	needModule("operations").
 	wantModule("saveStates").
 	IF hasModule("saveStates"){
 		getSaveState("systemBootTime", systemBootTime).
@@ -95,12 +97,9 @@ UNTIL systemInitialized {
 	wait 0.
 }
 
-//Download and run operations.
-needModule("operations").
-operations_load().
-
 UNTIL systemInterrupt {
 	operations_run().
+	wait 0.
 }
 
 systemInterrupt("SYSTEM ENTERED INTERRUPT STATE. REBOOT").

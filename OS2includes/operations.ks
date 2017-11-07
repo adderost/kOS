@@ -30,8 +30,6 @@ FUNCTION operations_load {
 				ELSE{
 					IF hasModule("log") log_output("Ops "+opsFilename+" downloaded successfully", "operations.log").
 					ELSE log_system("Ops "+opsFilename+" downloaded successfully", "Operations").
-
-					operations_add(operations_read@).
 				}
 			}
 		}
@@ -70,4 +68,5 @@ FUNCTION operations_run {
 	FOR operation IN operations_opsQueue {
 		operations:call().
 	}
+	IF operations_opsQueue:LENGTH <= 0 operations_add(operations_load@).
 }
