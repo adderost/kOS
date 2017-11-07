@@ -18,7 +18,7 @@ SET systemBootTime TO TIME:SECONDS.
 //DYNAMIC GLOBAL VARIABLES
 DECLARE GLOBAL loadedModules TO lexicon().
 
-FUNCTION bootSequence {
+FUNCTION bootSequence {	//Starts the system
 	needModule("system").
 	needModule("operations").
 	wantModule("saveStates").
@@ -31,7 +31,7 @@ FUNCTION bootSequence {
 	log_system("System has booted up successfully", "OS").
 }
 
-FUNCTION loadModule{ //LOADS A MODULE INTO MEMORY
+FUNCTION loadModule{	//Loads and runs a named module.
 	PARAMETER module.
 	PARAMETER clearCache IS FALSE.
 	DECLARE LOCAL modulePath IS includesDir+module+".ks".
@@ -61,7 +61,7 @@ FUNCTION loadModule{ //LOADS A MODULE INTO MEMORY
 	ELSE RETURN TRUE.
 }
 
-FUNCTION needModule{
+FUNCTION needModule{	//Used to load a required module. Will interrupt system if fail
 	PARAMETER module.
 	PARAMETER clearCache IS FALSE.
 
@@ -72,7 +72,7 @@ FUNCTION needModule{
 	ELSE RETURN TRUE.
 }
 
-FUNCTION wantModule{
+FUNCTION wantModule{	//Used to load an optional module. It's up to the caller to handle if it fails.
 	PARAMETER module.
 	PARAMETER clearCache IS FALSE.
 
@@ -83,7 +83,7 @@ FUNCTION wantModule{
 	ELSE RETURN TRUE.
 }
 
-FUNCTION hasModule{
+FUNCTION hasModule{		//Returns true if the module is loaded and available. Otherwise false.
 	PARAMETER module IS "dummy".
 	IF loadedModules:HASKEY(module){
 		RETURN loadedModules[module].
@@ -97,6 +97,7 @@ UNTIL systemInitialized {
 	wait 0.
 }
 
+//RUN operations
 log_system("Entering operations main loop", "OS").
 UNTIL systemInterrupt {
 	IF hasModule("cli_display") updateDisplay().
@@ -104,4 +105,5 @@ UNTIL systemInterrupt {
 	wait 0.
 }
 
+//If we get here something is probably wrong
 systemInterrupt("SYSTEM ENTERED INTERRUPT STATE. REBOOT").
