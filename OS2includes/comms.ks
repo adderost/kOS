@@ -32,11 +32,11 @@ ON comms_hasLocalControl {
 }
 
 ON timer {
-	checkSignal().
+	comms_check().
 	RETURN TRUE.
 }
 
-FUNCTION checkSignal {
+FUNCTION comms_check {
 	IF addons:available("RT") SET remoteConnection TO addons:RT.
 	ELSE {
 		IF hasModule("IO") io_syslog("Fatal error: No radiomodule available","Comms").
@@ -50,4 +50,4 @@ FUNCTION checkSignal {
 	ELSE SET comms_hasSignal TO FALSE.
 }
 
-checkSignal().
+comms_check().

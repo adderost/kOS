@@ -66,7 +66,7 @@ FUNCTION needModule{	//Used to load a required module. Will interrupt system if 
 	PARAMETER clearCache IS FALSE.
 
 	IF NOT loadModule(module, clearCache){
-		systemInterrupt("FATAL ERROR: Unable to load required module '"+module+"'", "OS").
+		system_interrupt("FATAL ERROR: Unable to load required module '"+module+"'", "OS").
 		RETURN FALSE.
 	}
 	ELSE RETURN TRUE.
@@ -100,10 +100,10 @@ UNTIL systemInitialized {
 //RUN operations
 io_syslog("Entering operations main loop", "OS").
 UNTIL systemInterrupt {
-	IF hasModule("cli_display") updateDisplay().
+	IF hasModule("cli") cli_display_update().
 	operations_run().
 	wait 0.
 }
 
 //If we get here something is probably wrong
-systemInterrupt("SYSTEM ENTERED INTERRUPT STATE. REBOOT").
+system_interrupt("SYSTEM ENTERED INTERRUPT STATE. REBOOT").

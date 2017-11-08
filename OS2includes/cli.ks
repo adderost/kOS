@@ -1,8 +1,9 @@
 //CONFIG	
-SET displayWidth TO ROUND(terminal:width).
-SET displayHeight TO 15.
+SET cli_width TO ROUND(terminal:width).
+SET cli_height TO 15.
 
 //DEPENDENCIES
+needModule("string").
 needModule("comms").
 
 //VARIABLES
@@ -19,33 +20,33 @@ SET cli_logBuffer TO "".
 SET cli_gaugeBuffer TO "".
 
 //MODULE
-FUNCTION startDisplay {
+FUNCTION cli_display_start {
 	IF NOT cli_displayActive{
 		SET cli_displayActive TO TRUE.
 		clearscreen.
-		updateDisplay().
+		cli_display_update().
 	}
 }
 
-FUNCTION stopDisplay {
+FUNCTION cli_display_stop {
 	SET cli_displayActive TO FALSE.
 }
 
-FUNCTION updateDisplay {
+FUNCTION cli_display_update {
 	SET cli_numUpdates TO cli_numUpdates + 1.
 	SET iterator TO 0.
 	SET row TO 0.
 
 	IF comms_hasSignalKSC OR comms_hasLocalControl {
 
-		SET gauges TO renderBox("System info", cli_render_gauges()).
+		SET gauges TO cli_renderBox("System info", cli_render_gauges()).
 		IF gauges <> cli_gaugeBuffer {
 			SET cli_gaugeBuffer TO gauges.
 			PRINT cli_gaugeBuffer AT(0,row).
 		}
-		SET row TO row+CEILING(cli_gaugeBuffer:LENGTH/displayWidth).
+		SET row TO row+CEILING(cli_gaugeBuffer:LENGTH/cli_width).
 
-		SET new_log_length TO (displayHeight - row).
+		SET new_log_length TO (cli_height - row).
 		IF new_log_length <> cli_log_length SET cli_log_updated TO TRUE.
 		SET cli_log_length TO new_log_length.
 
@@ -53,7 +54,7 @@ FUNCTION updateDisplay {
 			SET logStart TO (cli_log:LENGTH - cli_log_length).
 			IF logStart < 0 SET logStart TO 0.
 			SET logPart TO cli_log:SUBLIST(logStart, cli_log_length).
-			SET cli_logBuffer TO renderbox("Log", logPart).
+			SET cli_logBuffer TO cli_renderBox("Log", logPart).
 			SET cli_log TO logPart.
 			SET cli_log_updated TO FALSE.
 		}
@@ -61,32 +62,19 @@ FUNCTION updateDisplay {
 	}
 }
 
-FUNCTION renderBox {
+FUNCTION cli_renderBox {
 	PARAMETER title IS "".
 	PARAMETER content IS LIST().
 
 	SET output TO "".
 
-	SET output TO ("┏──" + title + repeatString("─", (displayWidth-title:LENGTH-4)) + "┓").
+	SET output TO ("┏──" + title + string_repeat("─", (cli_width-title:LENGTH-4)) + "┓").
 	FOR entry IN CONTENT {
-		SET output TO (output + "┃" + entry + repeatString(" ", displayWidth-2-entry:LENGTH) + "┃").
+		SET output TO (output + "┃" + entry + string_repeat(" ", cli_width-2-entry:LENGTH) + "┃").
 	}
-	SET output TO (output + ("┗" + repeatString("─", (displayWidth-2)) + "┛") ).
+	SET output TO (output + ("┗" + string_repeat("─", (cli_width-2)) + "┛") ).
 
 	RETURN output.
-}
-
-FUNCTION repeatString {
-	PARAMETER inStr IS "".
-	PARAMETER repeats IS 0.
-	
-	SET outStr TO "".
-	SET iterator TO 0.
-	UNTIL iterator >= repeats {
-		SET outStr TO outStr + inStr.
-		SET iterator TO iterator + 1.
-	}
-	RETURN outStr.
 }
 
 FUNCTION cli_add_gauge {
@@ -105,7 +93,7 @@ FUNCTION cli_add_gauge {
 }
 
 FUNCTION cli_render_gauges{
-	SET gaugewidth TO ROUND(displayWidth/2)-4.
+	SET gaugewidth TO ROUND(cli_width/2)-4.
 	SET out TO LIST().
 	FOR gauge IN cli_gauges{
 		IF gauge["value"] <> "Separator" {
@@ -116,7 +104,7 @@ FUNCTION cli_render_gauges{
 			}
 			SET meterFill  TO (ROUND(gaugewidth*(value/(gauge["max"]-gauge["min"])))).
 			SET meterEmpty TO (ROUND(gaugewidth*(1-(value/(gauge["max"]-gauge["min"]))))).
-			SET str TO "┃" + repeatString("█", meterFill ) + repeatString(" ", meterEmpty) + "┃ " + gauge["title"]+ " "+postscript.
+			SET str TO "┃" + string_repeat("█", meterFill ) + string_repeat(" ", meterEmpty) + "┃ " + gauge["title"]+ " "+postscript.
 			out:ADD(str).
 		}
 		ELSE out:ADD(" "+gauge["title"]).
@@ -130,7 +118,7 @@ FUNCTION cli_print {
 		cli_log:ADD(out).
 		SET cli_log_updated TO TRUE.
 		SET cli_latest_log TO out.
-		updateDisplay().
+		cli_display_update().
 	}
 	ELSE PRINT out.
 }

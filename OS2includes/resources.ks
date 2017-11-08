@@ -15,7 +15,7 @@ SET resources_monoIndex TO 0.
 LOCK resources_numAvailRsrc TO SHIP:RESOURCES:LENGTH.
 
 //DEPENDENCIES
-IF resources_showDisplay wantModule("cli_display").
+IF resources_showDisplay wantModule("cli").
 
 //MODULE
 ON resources_numAvailRsrc {
@@ -69,8 +69,8 @@ FUNCTION resources_updateResourcelist{
 }
 
 resources_updateResourcelist().
-IF hasModule("cli_display") {
-	startDisplay().
+IF hasModule("cli") {
+	cli_display_start().
 	IF resources_showDisplay{
 		cli_add_gauge("Separator", "Propellants").
 		cli_add_gauge(getresources_percentLiquidfuel@, "Liquid fuel").

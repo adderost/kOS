@@ -16,19 +16,19 @@ FUNCTION io_syslog{
 	IF io_saveLocalLogs io_safeLog(out, "/system.log").
 	IF hasModule("comms"){
 		IF comms_hasLocalControl {
-			IF NOT hasModule("cli_display") PRINT out.
+			IF NOT hasModule("cli") PRINT out.
 			ELSE cli_print(out).
 		}
 		IF io_logToKSC AND comms_hasSignalKSC{
 			IF NOT comms_hasLocalControl {
-				IF NOT hasModule("cli_display") PRINT out.
+				IF NOT hasModule("cli") PRINT out.
 				ELSE cli_print(out).
 			}
 			io_logdump().
 		}
 	}
 	ELSE {
-		IF NOT hasModule("cli_display") PRINT out.
+		IF NOT hasModule("cli") PRINT out.
 		ELSE cli_print(out).
 	} 
 }
