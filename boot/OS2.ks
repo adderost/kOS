@@ -2,7 +2,7 @@ clearscreen.
 PRINT "System startup".
 
 //CONFIGS
-SET includesDir TO "/OS2includes/".
+SET includesDir TO "/modules/".
 SET saveLocalModules TO FALSE.
 
 //SIGNALS
