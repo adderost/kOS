@@ -7,7 +7,7 @@ wantModule("comms").
 
 //MODULE
 //LOGS SYSTEM MESSAGES. OUTPUTS TO TERMINAL IF AVAILABLE
-FUNCTION log_system{
+FUNCTION io_syslog{
 	PARAMETER out.
 	PARAMETER sender IS "UNKNOWN".
 
@@ -46,7 +46,7 @@ FUNCTION io_logdump{
 			}
 		}
 	}
-	ELSE log_system("Unable to dump system log. Commsmodule not available", "IO").
+	ELSE io_syslog("Unable to dump system log. Commsmodule not available", "IO").
 }
 //LOGS STUFF TO PATH. IF MEMORY IS FULL DELETE LOG AND START AGIAN.
 FUNCTION io_safeLog{
@@ -65,7 +65,7 @@ FUNCTION io_safeLog{
 				core:volume:delete("/logCache").
 			}
 		}
-		log_system("Out of memory! New file ["+path+"]", "IO").
+		io_syslog("Out of memory! New file ["+path+"]", "IO").
 		IF core:volume:freespace > (str:LENGTH + 1) LOG str TO (path).
 	}
 }

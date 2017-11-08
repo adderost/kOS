@@ -21,16 +21,16 @@ FUNCTION operations_load {
 		SET opsFilename TO "ops_"+operations_opsCounter+".ks".	
 		IF archive:exists(archivePath+"ops.ks") {
 			IF hasModule("log") log_output("Loading operations #"+operations_opsCounter, "operations.log").
-			ELSE log_system("Loading operations #"+operations_opsCounter, "Operations").
+			ELSE io_syslog("Loading operations #"+operations_opsCounter, "Operations").
 			IF COPYPATH("0:"+archivePath+"ops.ks", "0:"+archivePath+opsFilename){
 				archive:delete(archivePath+"ops.ks").
 				IF NOT COPYPATH("0:"+archivePath+opsFilename, "/ops/"+opsFilename){
 					IF hasModule("log") log_output("Unable to download ops", "operations.log").
-					ELSE log_system("Unable to download ops", "Operations").
+					ELSE io_syslog("Unable to download ops", "Operations").
 				}
 				ELSE{
 					IF hasModule("log") log_output("Ops "+opsFilename+" downloaded successfully", "operations.log").
-					ELSE log_system("Ops "+opsFilename+" downloaded successfully", "Operations").
+					ELSE io_syslog("Ops "+opsFilename+" downloaded successfully", "Operations").
 					operations_add(operations_read@).
 				}
 			}
@@ -40,7 +40,7 @@ FUNCTION operations_load {
 		}
 	}
 	ELSE{
-		log_system("Can't load operations. No connection to archive", "Operations").
+		io_syslog("Can't load operations. No connection to archive", "Operations").
 		ON comms_hasSignalKSC {
 			operations_load().
 		}
@@ -50,11 +50,11 @@ FUNCTION operations_load {
 FUNCTION operations_read{
 	SET opsFilename TO "/ops/ops_"+operations_opsCounter+".ks".	
 	IF hasModule("log") log_output("Importing operations "+ opsFilename, "operations.log").
-	ELSE log_system("Importing operations "+ opsFilename, "Operations").
+	ELSE io_syslog("Importing operations "+ opsFilename, "Operations").
 	IF core:volume:exists(opsFilename) RUNPATH(opsFilename).
 	ELSE {
 		IF hasModule("log") log_output("Operations file doesn't exist. "+opsFilename, "operations.log").
-		ELSE log_system("Operations file doesn't exist. "+opsFilename, "Operations").
+		ELSE io_syslog("Operations file doesn't exist. "+opsFilename, "Operations").
 	}
 	SET operations_opsCounter TO operations_opsCounter + 1.
 }

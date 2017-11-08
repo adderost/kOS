@@ -13,7 +13,7 @@ FUNCTION log_output {
   SET logStr TO "[" +round(timer)+ "] " + text.
   IF log_saveLocalLogs io_safeLog(logStr, ("/log/"+logFile)).
   log_toArchive(logStr, logfile).
-  IF log_printToSyslog log_system("[-"+logFile+"-] "+logStr, "Log").
+  IF log_printToSyslog io_syslog("[-"+logFile+"-] "+logStr, "Log").
 }
 
 FUNCTION log_toArchive {
@@ -36,7 +36,7 @@ FUNCTION log_toArchive {
 FUNCTION log_dumpCache {
   IF core:volume:exists("/logCache") {
     FOR cacheFile IN core:volume:open("/logCache"):list:values{
-      log_system("Dumping cached log "+cacheFile, "Logging").
+      io_syslog("Dumping cached log "+cacheFile, "Logging").
       IF NOT core:volume:open("/logCache/"+cacheFile):readall:empty {
         SET cacheIterator to core:volume:open("/logCache/"+cacheFile):readall:iterator.
         UNTIL NOT cacheIterator:NEXT {
@@ -44,7 +44,7 @@ FUNCTION log_dumpCache {
           wait 0.
         }
       }
-      ELSE log_system("Cached log "+cacheFile+" empty", "Logging").
+      ELSE io_syslog("Cached log "+cacheFile+" empty", "Logging").
     }
     core:volume:delete("/logCache/").
   }

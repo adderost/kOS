@@ -7,18 +7,18 @@ wantModule("resources").
 //MODULE
 //SHUTS DOWN SYSTEM AND ATTEMPTS LOGDUMP
 FUNCTION shutdownSystem{
-	log_system("SYSTEM SHUTDOWN", "System").
-	dumplog_system().
+	io_syslog("SYSTEM SHUTDOWN", "System").
+	dumpio_syslog().
 	SHUTDOWN.
 }
 //REBOOTS SYSTEM
 FUNCTION rebootSystem{
-	log_system("SYSTEM REBOOTING", "System").
+	io_syslog("SYSTEM REBOOTING", "System").
 	REBOOT.
 }
 //REBOOTS WITH A MESSAGE
 FUNCTION systemInterrupt{
 	PARAMETER msg IS "".
-	IF hasModule("IO") log_system(msg, "System").
+	IF hasModule("IO") io_syslog(msg, "System").
 	rebootSystem().
 }

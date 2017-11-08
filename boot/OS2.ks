@@ -28,7 +28,7 @@ FUNCTION bootSequence {	//Starts the system
 	}
 
 	SET systemInitialized TO TRUE.
-	log_system("System has booted up successfully", "OS").
+	io_syslog("System has booted up successfully", "OS").
 }
 
 FUNCTION loadModule{	//Loads and runs a named module.
@@ -50,7 +50,7 @@ FUNCTION loadModule{	//Loads and runs a named module.
 		IF moduleLoaded{
 			RUNPATH(modulePath).
 			SET loadedModules[module] TO TRUE.
-			IF hasModule("IO") log_system("Loaded module: "+module, "OS").
+			IF hasModule("IO") io_syslog("Loaded module: "+module, "OS").
 			IF NOT saveLocalModules{
 				CORE:VOLUME:DELETE(modulePath).
 			}
@@ -77,7 +77,7 @@ FUNCTION wantModule{	//Used to load an optional module. It's up to the caller to
 	PARAMETER clearCache IS FALSE.
 
 	IF NOT loadModule(module, clearCache){
-		IF hasModule("IO") log_system("NOTICE: Unable to load optional module '"+module+"'", "OS").
+		IF hasModule("IO") io_syslog("NOTICE: Unable to load optional module '"+module+"'", "OS").
 		RETURN FALSE.
 	}
 	ELSE RETURN TRUE.
@@ -98,7 +98,7 @@ UNTIL systemInitialized {
 }
 
 //RUN operations
-log_system("Entering operations main loop", "OS").
+io_syslog("Entering operations main loop", "OS").
 UNTIL systemInterrupt {
 	IF hasModule("cli_display") updateDisplay().
 	operations_run().
