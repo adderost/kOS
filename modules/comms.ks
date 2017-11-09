@@ -1,21 +1,24 @@
 //VARIABLES
-SET comms_hasSignal TO FALSE.
-SET comms_hasSignalKSC TO FALSE.
-SET comms_hasLocalControl TO FALSE.
+SET comms_varHasSignal TO FALSE.
+SET comms_varHasSignalKSC TO FALSE.
+SET comms_varHasLocalControl TO FALSE.
 
 SET comms_logToKSC TO TRUE.
 
+//DEPENDENCIES
+needModule("scheduler").
+
 //MODULE
-ON comms_hasSignal {
+ON comms_varHasSignal {
 	IF hasModule("IO"){
-		IF comms_hasSignal io_syslog("Communications established","Comms").	
+		IF comms_varHasSignal io_syslog("Communications established","Comms").	
 		ELSE io_syslog("Communications lost","Comms").
 	}
 	RETURN TRUE.
 }
-ON comms_hasSignalKSC {
+ON comms_varHasSignalKSC {
 	IF hasModule("IO"){
-		IF comms_hasSignalKSC {
+		IF comms_varHasSignalKSC {
 			IF comms_logToKSC io_logdump().
 			io_syslog("Connection to KSC established","Comms").	
 		}
@@ -23,17 +26,27 @@ ON comms_hasSignalKSC {
 	}
 	RETURN TRUE.
 }
-ON comms_hasLocalControl {
+ON comms_varHasLocalControl {
 	IF hasModule("IO"){
-		IF comms_hasLocalControl io_syslog("Local control active","Comms").	
+		IF comms_varHasLocalControl io_syslog("Local control active","Comms").	
 		ELSE io_syslog("Local control inactive","Comms").
 	}
 	RETURN TRUE.
 }
 
-ON timer {
+FUNCTION comms_hasSignalKSC {
 	comms_check().
-	RETURN TRUE.
+	RETURN comms_varHasSignalKSC.
+}
+
+FUNCTION comms_hasLocalControl {
+	comms_check().
+	RETURN comms_varHasLocalControl.
+}
+
+FUNCTION comms_hasSignal {
+	comms_check().
+	RETURN comms_varHasSignal.
 }
 
 FUNCTION comms_check {
@@ -42,12 +55,12 @@ FUNCTION comms_check {
 		IF hasModule("IO") io_syslog("Fatal error: No radiomodule available","Comms").
 		IF hasModule("system") shutdownSystem().
 	}
-	IF remoteConnection:HASKSCCONNECTION(SHIP) SET comms_hasSignalKSC TO TRUE.
-	ELSE SET comms_hasSignalKSC TO FALSE.
-	IF remoteConnection:hasLocalControl(SHIP) SET comms_hasLocalControl TO TRUE.
-	ELSE SET comms_hasLocalControl TO FALSE.
-	IF remoteConnection:HASCONNECTION(SHIP) SET comms_hasSignal TO TRUE.
-	ELSE SET comms_hasSignal TO FALSE.
+	IF remoteConnection:HASKSCCONNECTION(SHIP) SET comms_varHasSignalKSC TO TRUE.
+	ELSE SET comms_varHasSignalKSC TO FALSE.
+	IF remoteConnection:hasLocalControl(SHIP) SET comms_varHasLocalControl TO TRUE.
+	ELSE SET comms_varHasLocalControl TO FALSE.
+	IF remoteConnection:HASCONNECTION(SHIP) SET comms_varHasSignal TO TRUE.
+	ELSE SET comms_varHasSignal TO FALSE.
 }
 
-comms_check().
+scheduler_add_everySecond("comms_check", comms_check@).

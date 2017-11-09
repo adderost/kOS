@@ -4,6 +4,7 @@ SET cli_height TO 15.
 
 //DEPENDENCIES
 needModule("string").
+needModule("scheduler").
 needModule("comms").
 
 //VARIABLES
@@ -24,12 +25,14 @@ FUNCTION cli_display_start {
 	IF NOT cli_displayActive{
 		SET cli_displayActive TO TRUE.
 		clearscreen.
-		cli_display_update().
+		scheduler_add_everySecond("cli_display_update", cli_display_update@).
 	}
 }
 
 FUNCTION cli_display_stop {
 	SET cli_displayActive TO FALSE.
+	scheduler_remove_everySecond("cli_display_update").
+	clearscreen.
 }
 
 FUNCTION cli_display_update {
@@ -118,7 +121,6 @@ FUNCTION cli_print {
 		cli_log:ADD(out).
 		SET cli_log_updated TO TRUE.
 		SET cli_latest_log TO out.
-		cli_display_update().
 	}
 	ELSE PRINT out.
 }

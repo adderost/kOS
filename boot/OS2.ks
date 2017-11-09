@@ -100,7 +100,6 @@ UNTIL systemInitialized {
 //RUN operations
 io_syslog("Entering operations main loop", "OS").
 UNTIL systemInterrupt {
-	IF hasModule("cli") cli_display_update().
 	operations_run().
 	wait 0.
 }

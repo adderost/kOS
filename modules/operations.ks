@@ -16,7 +16,7 @@ FUNCTION operations_load {
 		setSaveState("operations_opsCounter", operations_opsCounter).
 	}
 
-	IF comms_hasSignalKSC {
+	IF comms_hasSignalKSC(){
 		SET archivePath TO "/Vessels/"+ship:name+"/".
 		SET opsFilename TO "ops_"+operations_opsCounter+".ks".	
 		IF archive:exists(archivePath+"ops.ks") {
@@ -41,7 +41,7 @@ FUNCTION operations_load {
 	}
 	ELSE{
 		io_syslog("Can't load operations. No connection to archive", "Operations").
-		ON comms_hasSignalKSC {
+		ON comms_hasSignalKSC(){
 			operations_load().
 		}
 	}

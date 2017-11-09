@@ -15,12 +15,12 @@ FUNCTION io_syslog{
 
 	IF io_saveLocalLogs io_safeLog(out, "/system.log").
 	IF hasModule("comms"){
-		IF comms_hasLocalControl {
+		IF comms_hasLocalControl() {
 			IF NOT hasModule("cli") PRINT out.
 			ELSE cli_print(out).
 		}
-		IF io_logToKSC AND comms_hasSignalKSC{
-			IF NOT comms_hasLocalControl {
+		IF io_logToKSC AND comms_hasSignalKSC(){
+			IF NOT comms_hasLocalControl() {
 				IF NOT hasModule("cli") PRINT out.
 				ELSE cli_print(out).
 			}
@@ -35,7 +35,7 @@ FUNCTION io_syslog{
 //DUMPS THE SYSTEM LOG TO KSC ARCHIVE
 FUNCTION io_logdump{
 	IF hasModule("comms"){
-		IF comms_hasSignalKSC{
+		IF comms_hasSignalKSC(){
 			IF core:volume:exists("/system.log"){
 				SET logstr TO OPEN("/system.log"):READALL:ITERATOR.
 				UNTIL NOT logstr:NEXT {
