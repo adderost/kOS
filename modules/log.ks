@@ -25,7 +25,7 @@ FUNCTION log_toArchive {
       archive:open("/Vessels/" + ship:name + "/log/"+logFile):writeln(str).
     }
     ELSE{
-      io_safeLog(text, "/logCache/"+logfile).
+      io_safeLog(str, "/logCache/"+logfile).
     }
   }
   ELSE{
