@@ -2,6 +2,7 @@
 SET operations_opsCounter TO 0.
 SET operations_opsQueue TO LIST().
 SET operations_opsRun TO LIST().
+SET operations_opsLocked TO FALSE.
 
 //DEPENDENCIES
 needModule("IO").
@@ -16,33 +17,35 @@ FUNCTION operations_load {
 		setSaveState("operations_opsCounter", operations_opsCounter).
 	}
 
-	IF comms_hasSignalKSC(){
-		SET archivePath TO "/Vessels/"+ship:name+"/".
-		SET opsFilename TO "ops_"+operations_opsCounter+".ks".	
-		IF archive:exists(archivePath+"ops.ks") {
-			IF hasModule("log") log_output("Loading operations #"+operations_opsCounter, "operations.log").
-			ELSE io_syslog("Loading operations #"+operations_opsCounter, "Operations").
-			IF COPYPATH("0:"+archivePath+"ops.ks", "0:"+archivePath+opsFilename){
-				archive:delete(archivePath+"ops.ks").
-				IF NOT COPYPATH("0:"+archivePath+opsFilename, "/ops/"+opsFilename){
-					IF hasModule("log") log_output("Unable to download ops", "operations.log").
-					ELSE io_syslog("Unable to download ops", "Operations").
+	IF NOT operations_opsLocked {
+		IF comms_hasSignalKSC(){
+			SET archivePath TO "/Vessels/"+ship:name+"/".
+			SET opsFilename TO "ops_"+operations_opsCounter+".ks".	
+			IF archive:exists(archivePath+"ops.ks") {
+				IF hasModule("log") log_output("Loading operations #"+operations_opsCounter, "operations.log").
+				ELSE io_syslog("Loading operations #"+operations_opsCounter, "Operations").
+				IF COPYPATH("0:"+archivePath+"ops.ks", "0:"+archivePath+opsFilename){
+					archive:delete(archivePath+"ops.ks").
+					IF NOT COPYPATH("0:"+archivePath+opsFilename, "/ops/"+opsFilename){
+						IF hasModule("log") log_output("Unable to download ops", "operations.log").
+						ELSE io_syslog("Unable to download ops", "Operations").
+					}
+					ELSE{
+						IF hasModule("log") log_output("Ops "+opsFilename+" downloaded successfully", "operations.log").
+						ELSE io_syslog("Ops "+opsFilename+" downloaded successfully", "Operations").
+						operations_add(operations_read@).
+					}
 				}
-				ELSE{
-					IF hasModule("log") log_output("Ops "+opsFilename+" downloaded successfully", "operations.log").
-					ELSE io_syslog("Ops "+opsFilename+" downloaded successfully", "Operations").
-					operations_add(operations_read@).
-				}
+			}
+			ELSE{
+				
 			}
 		}
 		ELSE{
-			
-		}
-	}
-	ELSE{
-		io_syslog("Can't load operations. No connection to archive", "Operations").
-		ON comms_hasSignalKSC(){
-			operations_load().
+			io_syslog("Can't load operations. No connection to archive", "Operations").
+			ON comms_hasSignalKSC(){
+				operations_load().
+			}
 		}
 	}
 }
@@ -62,6 +65,14 @@ FUNCTION operations_read{
 FUNCTION operations_add{
 	PARAMETER ops.
 	IF ops:typename = "UserDelegate" operations_opsQueue:ADD(ops).
+}
+
+FUNCTION operations_lock {
+	SET operations_opsLocked TO TRUE.
+}
+
+FUNCTION operations_unlock {
+	SET operations_opsLocked TO FALSE.
 }
 
 FUNCTION operations_run {
