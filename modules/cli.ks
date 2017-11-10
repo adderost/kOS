@@ -1,5 +1,5 @@
 //CONFIG	
-SET cli_width TO ROUND(terminal:width).
+LOCK cli_width TO ROUND(terminal:width).
 SET cli_height TO 15.
 
 //DEPENDENCIES
@@ -40,12 +40,13 @@ FUNCTION cli_display_update {
 	SET iterator TO 0.
 	SET row TO 0.
 
-	IF comms_hasSignalKSC OR comms_hasLocalControl {
-
-		SET gauges TO cli_renderBox("System info", cli_render_gauges()).
-		IF gauges <> cli_gaugeBuffer {
-			SET cli_gaugeBuffer TO gauges.
-			PRINT cli_gaugeBuffer AT(0,row).
+	IF comms_hasSignalKSC() OR comms_hasLocalControl() {
+		IF ( MOD(cli_numUpdates, 10) == 0 ) {	//RENDER GAUGES EVERY TEN SECONDS. 
+			SET gauges TO cli_renderBox("System info", cli_render_gauges()).
+			IF gauges <> cli_gaugeBuffer {
+				SET cli_gaugeBuffer TO gauges.
+				PRINT cli_gaugeBuffer AT(0,row).
+			}
 		}
 		SET row TO row+CEILING(cli_gaugeBuffer:LENGTH/cli_width).
 
