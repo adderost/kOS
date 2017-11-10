@@ -1,8 +1,9 @@
 //CONFIG
-SET operations_opsCounter TO 0.
-SET operations_opsQueue TO LIST().
-SET operations_opsRun TO LIST().
-SET operations_opsLocked TO FALSE.
+SET operations_opsCounter TO 0.		//What ops are we running?
+SET operations_opsQueue TO LIST().	//List of ops running next cycle
+SET operations_opsRun TO LIST().	//List of ops running this cycle.
+SET operations_opsLocked TO FALSE.	//If true. We will not download new ops-files.
+SET operations_keepLocal TO FALSE.	//Should the system save local copies of ops-files
 
 //DEPENDENCIES
 needModule("IO").
@@ -54,12 +55,17 @@ FUNCTION operations_read{
 	SET opsFilename TO "/ops/ops_"+operations_opsCounter+".ks".	
 	IF hasModule("log") log_output("Importing operations "+ opsFilename, "operations.log").
 	ELSE io_syslog("Importing operations "+ opsFilename, "Operations").
-	IF core:volume:exists(opsFilename) RUNPATH(opsFilename).
+	IF core:volume:exists(opsFilename) 
+	{
+		RUNPATH(opsFilename).
+		IF NOT operations_keepLocal core:volume:delete(opsFilename).
+	}
 	ELSE {
 		IF hasModule("log") log_output("Operations file doesn't exist. "+opsFilename, "operations.log").
 		ELSE io_syslog("Operations file doesn't exist. "+opsFilename, "Operations").
 	}
 	SET operations_opsCounter TO operations_opsCounter + 1.
+	
 }
 
 FUNCTION operations_add{
