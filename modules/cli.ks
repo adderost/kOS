@@ -41,7 +41,7 @@ FUNCTION cli_display_update {
 	SET row TO 0.
 
 	IF comms_hasSignalKSC() OR comms_hasLocalControl() {
-		IF ( MOD(cli_numUpdates, 10) == 0 ) {	//RENDER GAUGES EVERY TEN SECONDS. 
+		IF ( MOD(cli_numUpdates, 10) = 0 ) {	//RENDER GAUGES EVERY TEN SECONDS. 
 			SET gauges TO cli_renderBox("System info", cli_render_gauges()).
 			IF gauges <> cli_gaugeBuffer {
 				SET cli_gaugeBuffer TO gauges.
