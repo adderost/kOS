@@ -22,9 +22,9 @@ FUNCTION time_format {
 		set hours to timevalue:hour.
 		set minutes to timevalue:minute.
 		set seconds to timevalue:second.
-		IF hours < 10 set hours to "0" + hours.
-		IF minutes < 10 set minutes to "0" + minutes.
-		IF seconds < 10 set seconds to "0" + seconds.
+		IF hours < 10 set hours to "0" + ABS(hours).
+		IF minutes < 10 set minutes to "0" + ABS(minutes).
+		IF seconds < 10 set seconds to "0" + ABS(seconds).
 
 		IF wantSign {
 			IF timevalue:seconds < time:seconds SET sign TO "+".
@@ -32,7 +32,7 @@ FUNCTION time_format {
 		}
 		ELSE SET sign TO "".
 
-		RETURN (sign+ABS(hours)+":"+ABS(minutes)+":"+ABS(seconds)).
+		RETURN (sign+hours+":"+minutes+":"+seconds).
 	}
 	ELSE RETURN "".
 }
