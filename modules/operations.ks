@@ -32,7 +32,7 @@ FUNCTION operations_load {
 				IF sourcePath = (archivePath+"ops.ks") archive:delete(archivePath+"ops.ks").
 				IF NOT COPYPATH("0:"+archivePath+opsFilename, "/ops/"+opsFilename){
 					IF hasModule("log") log_output("Unable to download ops", "operations.log").
-					ELSE io_syslog("Unable to download ops", "Operations").
+					ELSE io_syslog("Unable to download ops - Not enough memory?", "Operations").
 				}
 				ELSE{
 					IF hasModule("log") log_output("Ops "+opsFilename+" downloaded successfully", "operations.log").
