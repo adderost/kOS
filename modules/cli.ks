@@ -1,6 +1,6 @@
 //CONFIG	
 LOCK cli_width TO ROUND(terminal:width).
-SET cli_height TO 15.
+SET cli_height TO 20.
 
 //DEPENDENCIES
 needModule("string").
