@@ -14,7 +14,7 @@ FUNCTION log_output {
   SET logStr TO "[T" +time_getDeltaT()+ "] " + text.
   IF log_saveLocalLogs io_safeLog(logStr, ("/log/"+logFile)).
   log_toArchive(logStr, logfile).
-  IF log_printToSyslog io_syslog("[-"+logFile+"-] "+logStr, "Log").
+  IF log_printToSyslog io_syslog("["+logFile+"] "+logStr, "Log").
 }
 
 FUNCTION log_toArchive {
