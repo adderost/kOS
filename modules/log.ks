@@ -11,7 +11,7 @@ wantModule("comms").
 FUNCTION log_output {
   PARAMETER text.
   PARAMETER logFile IS "output.log".
-  SET logStr TO "[T" +time_deltaT()+ "] " + text.
+  SET logStr TO "[T" +time_getDeltaT()+ "] " + text.
   IF log_saveLocalLogs io_safeLog(logStr, ("/log/"+logFile)).
   log_toArchive(logStr, logfile).
   IF log_printToSyslog io_syslog("[-"+logFile+"-] "+logStr, "Log").
