@@ -20,7 +20,8 @@ FUNCTION operations_load {
 
 	IF NOT operations_opsLocked {
 		IF comms_hasSignalKSC(){
-			SET archivePath TO "/Vessels/"+ship:name+"/".
+			SET opsPath TO ship:name:REPLACE(" - ", "/").
+			SET archivePath TO "/Vessels/"+opsPath+"/".
 			SET opsFilename TO "ops_"+operations_opsCounter+".ks".	
 			IF archive:exists(archivePath+"ops.ks") {
 				IF hasModule("log") log_output("Loading operations #"+operations_opsCounter, "operations.log").
