@@ -68,16 +68,18 @@ FUNCTION resources_updateResourcelist{
 	IF resources_monoIndex > -1 LOCK resources_percentMonopropellant TO (SHIP:RESOURCES[resources_monoIndex]:amount / SHIP:RESOURCES[resources_monoIndex]:capacity).
 }
 
-resources_updateResourcelist().
-IF hasModule("cli") {
-	cli_display_start().
-	IF resources_showDisplay{
-		cli_add_gauge("Separator", "Propellants").
-		cli_add_gauge(getresources_percentLiquidfuel@, "Liquid fuel").
-		cli_add_gauge(getresources_percentOxidizer@, "Oxidizer").
-		cli_add_gauge(getresources_percentMonopropellant@, "Monopropellant").
-		cli_add_gauge("Separator", "Electronics and system resources").
-		cli_add_gauge(getresources_percentElectriccharge@, "Electric charge").
-		cli_add_gauge(getresources_percentStorage@, "System memory").
+FUNCTION resources_addResourceMonitor {
+	IF hasModule("cli") {
+		IF resources_showDisplay{
+			cli_add_gauge("Separator", "Propellants").
+			cli_add_gauge(getresources_percentLiquidfuel@, "Liquid fuel").
+			cli_add_gauge(getresources_percentOxidizer@, "Oxidizer").
+			cli_add_gauge(getresources_percentMonopropellant@, "Monopropellant").
+			cli_add_gauge("Separator", "Electronics and system resources").
+			cli_add_gauge(getresources_percentElectriccharge@, "Electric charge").
+			cli_add_gauge(getresources_percentStorage@, "System memory").
+		}
 	}
 }
+
+resources_updateResourcelist().
