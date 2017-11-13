@@ -1,0 +1,28 @@
+[01:07:36]	[Comms]	Communications established
+[01:07:36]	[Comms]	Connection to KSC established
+[01:07:37]	[OS]	NOTICE: Unable to load optional module 'saveStates'
+[01:07:37]	[OS]	System has booted up successfully
+[01:07:37]	[OS]	Entering operations main loop
+[01:07:37]	[Log]	[-operations.log-] [Tnull] Loading operations #0
+[01:07:38]	[Log]	[-operations.log-] [Tnull] Ops ops_0.ks downloaded successfully
+[01:07:38]	[Log]	[-operations.log-] [Tnull] Importing operations /ops/ops_0.ks
+[01:07:35]	[Comms]	Connection to KSC established
+[01:07:35]	[Comms]	Communications established
+[01:07:35]	[OS]	NOTICE: Unable to load optional module 'saveStates'
+[01:07:35]	[OS]	System has booted up successfully
+[01:07:36]	[OS]	Entering operations main loop
+[01:07:36]	[Log]	[-operations.log-] [Tnull] Loading operations #0
+[01:07:36]	[Log]	[-operations.log-] [Tnull] Ops ops_0.ks downloaded successfully
+[01:07:37]	[Log]	[-operations.log-] [Tnull] Importing operations /ops/ops_0.ks
+[01:07:39]	[System]	Couldnt load module /modules/resources.ks
+[01:07:39]	[System]	SYSTEM REBOOTING
+[01:07:35]	[Comms]	Communications established
+[01:07:35]	[Comms]	Connection to KSC established
+[01:07:36]	[OS]	NOTICE: Unable to load optional module 'saveStates'
+[01:07:36]	[OS]	System has booted up successfully
+[01:07:36]	[OS]	Entering operations main loop
+[01:07:37]	[Log]	[-operations.log-] [Tnull] Loading operations #0
+[01:07:37]	[Log]	[-operations.log-] [Tnull] Ops ops_0.ks downloaded successfully
+[01:07:37]	[Log]	[-operations.log-] [Tnull] Importing operations /ops/ops_0.ks
+[01:07:39]	[System]	Couldnt load module /modules/resources.ks
+[01:07:40]	[System]	SYSTEM REBOOTING

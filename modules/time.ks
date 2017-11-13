@@ -21,16 +21,20 @@ FUNCTION time_format {
 		set hours to time:hour.
 		set minutes to time:minute.
 		set seconds to time:second.
-		if hours < 10 set hours to "0" + hours.
-		if minutes < 10 set minutes to "0" + minutes.
-		if seconds < 10 set seconds to "0" + seconds.
-		RETURN (hours+":"+minutes+":"+seconds).
+		IF hours < 10 set hours to "0" + hours.
+		IF minutes < 10 set minutes to "0" + minutes.
+		IF seconds < 10 set seconds to "0" + seconds.
+
+		IF timevalue:seconds < time:seconds SET sign TO "+".
+		ELSE SET sign TO "-".
+
+		RETURN (sign+hours+":"+minutes+":"+seconds).
 	}
 	ELSE RETURN "".
 }
 
 FUNCTION time_setT { //time Sets what time is to be regarded as T.
-	Parameter T
+	Parameter T IS time.
 	IF T:typename = "TimeSpan" {
 		SET time_T TO T.
 		RETURN TRUE.

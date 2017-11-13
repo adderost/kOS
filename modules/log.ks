@@ -20,10 +20,13 @@ FUNCTION log_output {
 FUNCTION log_toArchive {
   PARAMETER str.
   PARAMETER logFile.
+
+  SET logPath TO ship:name:REPLACE(" - ", "/")+"/log/".
+
   IF hasModule("comms"){
     IF comms_hasSignalKSC(){
-      IF NOT archive:exists("/Vessels/" + ship:name + "/log/"+logFile) archive:create("/Vessels/" + ship:name + "/log/"+logFile).
-      archive:open("/Vessels/" + ship:name + "/log/"+logFile):writeln(str).
+      IF NOT archive:exists("/Vessels/"+logPath+logFile) archive:create("/Vessels/"+logPath+logFile).
+      archive:open("/Vessels/"+logPath+logFile):writeln(str).
     }
     ELSE{
       io_safeLog(str, "/logCache/"+logfile).

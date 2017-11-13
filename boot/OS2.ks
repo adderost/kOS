@@ -34,21 +34,21 @@ FUNCTION loadModule{	//Loads and runs a named module.
 	DECLARE LOCAL modulePath IS includesDir+module+".ks".
 	DECLARE LOCAL moduleLoaded IS FALSE.
 
-	IF NOT loadedModules:HASKEY(module){
+	IF NOT loadedModules:HASKEY(module) {
 		loadedModules:ADD(module, FALSE).
 		IF NOT clearCache AND core:volume:exists(modulePath){
 			SET moduleLoaded TO TRUE.
 		}
 		ELSE IF archive:exists(modulePath) {
-			COPYPATH("0:"+modulePath, modulePath).
-			SET moduleLoaded TO TRUE.
+			IF COPYPATH("0:"+modulePath, modulePath) SET moduleLoaded TO TRUE.
+			ELSE system_interrupt("Couldnt load module "+modulePath).
 		}
 
 		IF moduleLoaded{
 			RUNPATH(modulePath).
 			SET loadedModules[module] TO TRUE.
-			IF hasModule("IO") io_syslog("Loaded module: "+module, "OS").
-			IF NOT saveLocalModules{
+			//IF hasModule("IO") io_syslog("Loaded module: "+module, "OS").
+			IF NOT saveLocalModules {
 				CORE:VOLUME:DELETE(modulePath).
 			}
 			RETURN TRUE.
