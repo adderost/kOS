@@ -32,7 +32,7 @@ FUNCTION time_format {
 		}
 		ELSE SET sign TO "".
 
-		RETURN (sign+hours+":"+minutes+":"+seconds).
+		RETURN (sign+ABS(hours)+":"+ABS(minutes)+":"+ABS(seconds)).
 	}
 	ELSE RETURN "".
 }
