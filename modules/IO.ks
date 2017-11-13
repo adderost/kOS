@@ -11,7 +11,7 @@ FUNCTION io_syslog{
 	PARAMETER out.
 	PARAMETER sender IS "UNKNOWN".
 
-	SET out TO "["+sender+"] "+out.
+	SET out TO "["+sender+"]	"+out.
 
 	IF io_saveLocalLogs io_safeLog(out, "/system.log").
 	IF hasModule("comms"){
@@ -52,7 +52,7 @@ FUNCTION io_logdump{
 FUNCTION io_safeLog{
 	PARAMETER str.
 	PARAMETER path.
-	SET str TO "["+timer+"]	"+str. 
+	SET str TO "["+time_current()+"]	"+str. 
 	IF core:volume:freespace > (str:LENGTH + 1) {
 		IF NOT core:volume:exists(path) core:volume:create(path).
 		core:volume:open(path):writeln(str).

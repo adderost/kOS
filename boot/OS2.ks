@@ -9,9 +9,6 @@ SET saveLocalModules TO FALSE.
 SET systemInitialized TO FALSE.
 SET systemInterrupt TO FALSE.
 
-//TIMER (Fires every second)
-LOCK timer TO ROUND(TIME:SECONDS - systemBootTime).
-
 //STATIC VARIABLES
 SET systemBootTime TO TIME:SECONDS.
 

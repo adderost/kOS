@@ -1,8 +1,7 @@
 //CONFIG
 
 //DEPENDENCIES
-wantModule("IO").
-wantModule("resources").
+needModule("IO").
 
 //MODULE
 //SHUTS DOWN SYSTEM AND ATTEMPTS LOGDUMP
