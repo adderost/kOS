@@ -46,7 +46,6 @@ FUNCTION operations_load {
 		}
 	}
 	ELSE{
-		io_syslog("Can't load operations. No connection to archive", "Operations").
 		ON comms_hasSignalKSC(){
 			operations_load().
 		}
