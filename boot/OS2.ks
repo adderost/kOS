@@ -18,6 +18,7 @@ DECLARE GLOBAL loadedModules TO lexicon().
 FUNCTION bootSequence {	//Starts the system
 	needModule("system").
 	needModule("operations").
+	needModule("resources").
 	wantModule("saveStates").
 	IF hasModule("saveStates"){
 		getSaveState("systemBootTime", systemBootTime).

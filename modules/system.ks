@@ -7,12 +7,12 @@ needModule("IO").
 //SHUTS DOWN SYSTEM AND ATTEMPTS LOGDUMP
 FUNCTION system_shutdown{
 	io_syslog("SYSTEM SHUTDOWN", "System").
-	dumpio_syslog().
+	io_logdump().
 	SHUTDOWN.
 }
 //REBOOTS SYSTEM
 FUNCTION system_reboot{
-	io_syslog("SYSTEM REBOOTING", "System").
+	IF hasModule("IO") io_syslog("SYSTEM REBOOTING", "System").
 	REBOOT.
 }
 //REBOOTS WITH A MESSAGE
