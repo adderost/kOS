@@ -73,7 +73,8 @@ FUNCTION cli_renderBox {
 
 	SET output TO ("┏──" + title + string_repeat("─", (cli_width-title:LENGTH-4)) + "┓").
 	FOR entry IN CONTENT {
-		SET output TO (output + "┃" + entry:SUBSTRING(0,cli_width-2-entry:LENGTH) + string_repeat(" ", cli_width-2-entry:LENGTH) + "┃").
+		IF ( entry:LENGTH > cli_width-2 ) SET output TO (output + "┃" + entry:SUBSTRING(0,cli_width-2) + string_repeat(" ", cli_width-2-entry:LENGTH) + "┃").
+		ELSE SET output TO (output + "┃" + entry + string_repeat(" ", cli_width-2-entry:LENGTH) + "┃").
 	}
 	SET output TO (output + ("┗" + string_repeat("─", (cli_width-2)) + "┛") ).
 
