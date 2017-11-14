@@ -59,7 +59,6 @@ FUNCTION cli_display_update {
 			IF logStart < 0 SET logStart TO 0.
 			SET logPart TO cli_log:SUBLIST(logStart, cli_log_length).
 			SET cli_logBuffer TO cli_renderBox("Log", logPart).
-			SET cli_log TO logPart.
 			SET cli_log_updated TO FALSE.
 		}
 		PRINT cli_logBuffer AT (0,row).
@@ -74,7 +73,7 @@ FUNCTION cli_renderBox {
 
 	SET output TO ("┏──" + title + string_repeat("─", (cli_width-title:LENGTH-4)) + "┓").
 	FOR entry IN CONTENT {
-		SET output TO (output + "┃" + entry + string_repeat(" ", cli_width-2-entry:LENGTH) + "┃").
+		SET output TO (output + "┃" + entry:SUBSTRING(0,cli_width-2-entry:LENGTH) + string_repeat(" ", cli_width-2-entry:LENGTH) + "┃").
 	}
 	SET output TO (output + ("┗" + string_repeat("─", (cli_width-2)) + "┛") ).
 
