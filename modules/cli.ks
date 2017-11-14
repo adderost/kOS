@@ -106,8 +106,8 @@ FUNCTION cli_render_gauges{
 			IF gauge["min"] = 0 AND gauge["max"] = 1{
 				SET postscript TO (ROUND(value,2)*100) +"%".
 			}
-			SET meterFill  TO (ROUND(gaugewidth*(value/(gauge["max"]-gauge["min"])))).
-			SET meterEmpty TO (ROUND(gaugewidth*(1-(value/(gauge["max"]-gauge["min"]))))).
+			SET meterFill  TO (FLOOR(gaugewidth*(value/(gauge["max"]-gauge["min"])))).
+			SET meterEmpty TO (CEILING(gaugewidth*(1-(value/(gauge["max"]-gauge["min"]))))).
 			SET str TO "┃" + string_repeat("█", meterFill ) + string_repeat(" ", meterEmpty) + "┃ " + gauge["title"]+ " "+postscript.
 			out:ADD(str).
 		}
