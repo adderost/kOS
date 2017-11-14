@@ -1,5 +1,5 @@
 //CONFIG	
-LOCK cli_width TO ROUND(terminal:width).
+LOCK cli_width TO terminal:width.
 SET cli_height TO 20.
 
 //DEPENDENCIES
@@ -15,7 +15,6 @@ SET cli_log TO LIST().
 
 SET cli_log_updated TO FALSE.
 SET cli_log_length TO 0.
-SET cli_latest_log TO "".
 
 SET cli_logBuffer TO "".
 SET cli_gaugeBuffer TO "".
@@ -44,24 +43,25 @@ FUNCTION cli_display_update {
 		IF ( MOD(cli_numUpdates, 10) = 0 OR cli_gaugeBuffer = "") {	//RENDER GAUGES EVERY TEN SECONDS. 
 			SET gauges TO cli_renderBox("System info", cli_render_gauges()).
 			IF gauges <> cli_gaugeBuffer {
-				SET cli_gaugeBuffer TO gauges.
-				PRINT cli_gaugeBuffer AT(0,row).
+				SET cli_gaugeBuffer TO gauges.	
 			}
 		}
-		SET row TO row+CEILING(cli_gaugeBuffer:LENGTH/cli_width).
+		SET row TO cli_print_lines_at(cli_gaugeBuffer, row).
 
 		SET new_log_length TO (cli_height - row).
 		IF new_log_length <> cli_log_length SET cli_log_updated TO TRUE.
 		SET cli_log_length TO new_log_length.
 
-		IF cli_log_updated AND cli_log_length > 0 {
+		IF cli_log_updated AND cli_log_length > 0 AND cli_log:LENGTH > 0 {
+
 			SET logStart TO (cli_log:LENGTH - cli_log_length).
 			IF logStart < 0 SET logStart TO 0.
+
 			SET logPart TO cli_log:SUBLIST(logStart, cli_log_length).
 			SET cli_logBuffer TO cli_renderBox("Log", logPart).
 			SET cli_log_updated TO FALSE.
 		}
-		PRINT cli_logBuffer AT (0,row).
+		SET row TO cli_print_lines_at(cli_logBuffer, row).
 	}
 }
 
@@ -72,9 +72,10 @@ FUNCTION cli_renderBox {
 	SET output TO "".
 
 	SET output TO ("┏──" + title + string_repeat("─", (cli_width-title:LENGTH-4)) + "┓").
-	FOR entry IN CONTENT {
-		IF ( entry:LENGTH > cli_width-2 ) SET output TO (output + "┃" + entry:SUBSTRING(0,cli_width-2) + string_repeat(" ", cli_width-2-entry:LENGTH) + "┃").
-		ELSE SET output TO (output + "┃" + entry + string_repeat(" ", cli_width-2-entry:LENGTH) + "┃").
+	FOR entry IN content {
+		IF ( entry:LENGTH > cli_width-2 ) SET newLine TO ( "┃" + entry:SUBSTRING(0,cli_width-2) + string_repeat(" ", cli_width-2-(entry:LENGTH)) + "┃").
+		ELSE SET newLine TO ( "┃" + entry + string_repeat(" ", cli_width-2-(entry:LENGTH)) + "┃").
+		SET output TO output + newLine.
 	}
 	SET output TO (output + ("┗" + string_repeat("─", (cli_width-2)) + "┛") ).
 
@@ -121,7 +122,27 @@ FUNCTION cli_print {
 	IF cli_displayActive {
 		cli_log:ADD(out).
 		SET cli_log_updated TO TRUE.
-		SET cli_latest_log TO out.
 	}
 	ELSE PRINT out.
+}
+
+FUNCTION cli_print_lines_at {
+	PARAMETER out.
+	PARAMETER line IS 0.
+
+	IF cli_displayActive {
+		UNTIL out:LENGTH <= 0 {
+			IF out:LENGTH > cli_width {
+				PRINT out:SUBSTRING(0,cli_width+1) AT(0, line).
+				SET out TO out:SUBSTRING(cli_width, out:LENGTH - cli_width).
+				SET line TO line + 1.
+			}
+			ELSE {
+				PRINT out AT(0,line).
+				SET out TO "".
+				SET line TO line + 1.
+			}
+		}
+	}
+	RETURN line.
 }
