@@ -70,6 +70,7 @@ FUNCTION operations_read{
 			ELSE io_syslog("Operations file doesn't exist. "+opsFilename, "Operations").
 		}
 		SET operations_opsCounter TO operations_opsCounter + 1.	
+		operations_add(operations_load@).
 	}
 }
 
