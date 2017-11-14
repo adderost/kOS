@@ -75,6 +75,7 @@ FUNCTION resources_addResourceMonitor {
 			cli_add_gauge(getresources_percentLiquidfuel@, "Liquid fuel").
 			cli_add_gauge(getresources_percentOxidizer@, "Oxidizer").
 			cli_add_gauge(getresources_percentMonopropellant@, "Monopropellant").
+			cli_add_gauge("Separator", " ").
 			cli_add_gauge("Separator", "Electronics and system resources").
 			cli_add_gauge(getresources_percentElectriccharge@, "Electric charge").
 			cli_add_gauge(getresources_percentStorage@, "System memory").
