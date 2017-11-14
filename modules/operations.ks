@@ -38,6 +38,7 @@ FUNCTION operations_load {
 					IF hasModule("log") log_output("Ops "+opsFilename+" downloaded successfully", "operations.log").
 					ELSE io_syslog("Ops "+opsFilename+" downloaded successfully", "Operations").
 					SET operations_opsLoader TO operations_opsLoader + 1.
+					operations_add(operations_load@).
 				}
 			}
 		}
