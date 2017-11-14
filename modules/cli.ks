@@ -119,7 +119,9 @@ FUNCTION cli_render_gauges{
 
 FUNCTION cli_print {
 	PARAMETER out.
+
 	IF cli_displayActive {
+		SET out TO out:REPLACE("	", "").
 		cli_log:ADD(out).
 		SET cli_log_updated TO TRUE.
 	}

@@ -12,7 +12,7 @@ FUNCTION io_syslog {
 	PARAMETER out.
 	PARAMETER sender IS "UNKNOWN".
 
-	SET out TO "["+sender+"]"+out.
+	SET out TO "["+sender+"]	"+out.
 
 	IF io_saveLocalLogs io_safeLog(out, "/system.log").
 	IF hasModule("comms"){
