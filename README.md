@@ -9,7 +9,10 @@ All vessels comes preloaded with an OS from the /boot-folder*
   - Almost all functionality is delegated to dynamically loaded modules.
   - At startup modules to control system functions and running operations are loaded.
   - Offers many global and module-specific customizations for vessel- or OPS-Specific behaviour.
-  - Operations-running is now delegated to a module. 
+  - Operations module offers multiple simultaneously running programs and ops.
+  - Completely revamped logging-system
+  - A more sophisticated real-time monitoring display
+  - The system can preload and run multiple ops-files for serial or simultaneous ops.
 
 ## OS1
 * **OS1** is the first OS for vessels from the KSC.
