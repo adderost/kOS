@@ -148,11 +148,11 @@ FUNCTION opsRun {
 	OPEN("/systemData/opcode.sav"):write(opCode:TOSTRING).
 	SET opsFilename TO "ops_"+opCode+".ks".	
 	IF hasSignalKSC {
-		IF archive:exists("/Vessels/"+ship:name+"/ops.ks") {
+		IF archive:exists("/Vessels/"+ship:name:REPLACE(" - ", "/")+"/ops.ks") {
 			systemLog("Downloading operations: "+opsFilename).
-			IF COPYPATH("0:/Vessels/"+ship:name+"/ops.ks", "0:/Vessels/"+ship:name+"/"+opsFilename){
-				archive:delete("/Vessels/"+ship:name+"/ops.ks").
-				IF NOT COPYPATH("0:/Vessels/"+ship:name+"/"+opsFilename, "/ops/"+opsFilename) systemLog("Download of operations failed. Free space: "+core:volume:freespace+" bytes").
+			IF COPYPATH("0:/Vessels/"+ship:name:REPLACE(" - ", "/")+"/ops.ks", "0:/Vessels/"+ship:name:REPLACE(" - ", "/")+"/"+opsFilename){
+				archive:delete("/Vessels/"+ship:name:REPLACE(" - ", "/")+"/ops.ks").
+				IF NOT COPYPATH("0:/Vessels/"+ship:name:REPLACE(" - ", "/")+"/"+opsFilename, "/ops/"+opsFilename) systemLog("Download of operations failed. Free space: "+core:volume:freespace+" bytes").
 			}
 		}
 	}
