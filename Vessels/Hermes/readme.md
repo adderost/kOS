@@ -12,6 +12,7 @@ The Launch Vehicle is a slightly modified and modernized version of the Continua
   * The third stage, or the orbital stage, has exchanged the quite oversized LV-T30 Reliant LF-engine for the smaller, lighter, and weaker LV-909 Terrier LF-engine.
   * The boosters on the first stage has been outfitted with small retrorockets that will make sure the boosters separate cleanly from the second stage.
   * Since the whole Launch Vehicle is designed to be recoverable the per-launch cost will be lower than the cost listed in the table below.
+  * Our engineers estimate that up to ~$6200 can be shaved off the per-launch cost if recovery of dropped stages is successful
 
 ### Comparisons between Continuator LV and Hermes LV
   | Comparison    | Continuator LV | Hermes LV   |
@@ -19,7 +20,7 @@ The Launch Vehicle is a slightly modified and modernized version of the Continua
   | Total ΔV      | 4414 m/s       | 5245 m/s    |
   | Stage 1 ΔV    | 1145 m/s       | 952 m/s     |
   | Stage 2 ΔV    | 1782 m/s       | 1897 m/s    |
-  | Stage 3 ΔV    | 1487 m/s       | 2396 m/s     |
+  | Stage 3 ΔV    | 1487 m/s       | 2396 m/s    |
   | Wet weight    | 25170 Kg       | 21809 Kg    |
   | Dry weight    | 6770 Kg        | 6221 Kg     |
   | Total cost    | $11607         | $12310      |
