@@ -40,7 +40,7 @@ FUNCTION log_toArchive {
 FUNCTION log_dumpCache {
   IF core:volume:exists("/logCache") {
     FOR cacheFile IN core:volume:open("/logCache"):list:values{
-      io_syslog("Dumping cached log "+cacheFile, "Logging").
+      io_syslog("Dumping cached log "+cacheFile, "Log").
       IF NOT core:volume:open("/logCache/"+cacheFile):readall:empty {
         SET cacheIterator to core:volume:open("/logCache/"+cacheFile):readall:iterator.
         UNTIL NOT cacheIterator:NEXT {
@@ -48,7 +48,7 @@ FUNCTION log_dumpCache {
           wait 0.
         }
       }
-      ELSE io_syslog("Cached log "+cacheFile+" empty", "Logging").
+      ELSE io_syslog("Cached log "+cacheFile+" empty", "Log").
     }
     core:volume:delete("/logCache/").
   }
