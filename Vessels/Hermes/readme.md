@@ -4,13 +4,14 @@
 ![alt text](https://raw.githubusercontent.com/adderost/kOS/master/Vessels/Hermes/Hermes-launcher.png "Hermes Launch Vehicle")
 
 ## The Launch Vehicle
-The Launch Vehicle is a slightly modified and modernized version of the Continuator launcher with much greater range (the orbital stage could possibly bring a small payload on a roundtrip to the Mun).
+The Launch Vehicle is a slightly modified and modernized version of the Continuator launcher with greater range (the orbital stage could possibly bring a small payload on a roundtrip to the Mun).
 
 ### Changes from Continuator Launch Vehicle
   * The Hermes-series Launch Vehicle only has three solid fuel boosters in the first stage as opposed to the Continuator-series Launch Vehicle which had four.
   * Every stage on the Hermes-series Launch Vehicle is outfitted with auto-deploying parachutes in order to make the launcher completely recoverable from Low Kerbin Orbit.
   * The third stage, or the orbital stage, has exchanged the quite oversized LV-T30 Reliant LF-engine for the smaller, lighter, and weaker LV-909 Terrier LF-engine.
   * The boosters on the first stage has been outfitted with small retrorockets that will make sure the boosters separate cleanly from the second stage.
+  * Since the whole Launch Vehicle is designed to be recoverable the per-launch cost will be lower than the cost listed in the table below.
 
 ### Comparisons between Continuator LV and Hermes LV
   | Comparison    | Continuator LV | Hermes LV   |
