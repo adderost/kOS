@@ -19,7 +19,7 @@ The Launch Vehicle is a slightly modified and modernized version of the Continua
   | Total ΔV      | 4414 m/s       | 5245 m/s    |
   | Stage 1 ΔV    | 1145 m/s       | 952 m/s     |
   | Stage 2 ΔV    | 1782 m/s       | 1897 m/s    |
-  | Stage 3 ΔV    | 1487 m/s       | 952 m/s     |
+  | Stage 3 ΔV    | 1487 m/s       | 2396 m/s     |
   | Wet weight    | 25170 Kg       | 21809 Kg    |
   | Dry weight    | 6770 Kg        | 6221 Kg     |
   | Total cost    | $11607         | $12310      |
