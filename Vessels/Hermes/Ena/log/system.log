@@ -1,0 +1,60 @@
+[02:22:16]	[Comms]	Communications established
+[02:22:16]	[Comms]	Connection to KSC established
+[02:22:17]	[OS]	NOTICE: Unable to load optional module 'saveStates'
+[02:22:19]	[OS]	System has booted up successfully
+[02:22:19]	[OS]	Entering operations main loop
+[02:22:20]	[Log]	[operations.log]	[Tnull]	Loading operations #0
+[02:22:20]	[Log]	[operations.log]	[Tnull]	Ops ops_0.ks downloaded successfully
+[02:22:21]	[Log]	[operations.log]	[Tnull]	Loading operations #1
+[02:22:22]	[Log]	[operations.log]	[Tnull]	Unable to download ops - Not enough memory?
+[02:22:22]	[Log]	[operations.log]	[Tnull]	Importing operations /ops/ops_0.ks
+[02:22:27]	[Log]	[Ascent.log]	[Tnull]	Initializing LKOC Ascent & Circulization operations
+[02:22:27]	[Time]	T set to 02:22:37
+[02:22:29]	[Log]	[Ascent.log]	[T-00:00:09]	Waiting for T
+[02:22:30]	[Log]	[operations.log]	[T-00:00:08]	Loading operations #1
+[02:22:31]	[Log]	[operations.log]	[T-00:00:07]	Ops ops_1.ks downloaded successfully
+[02:22:32]	[Log]	[Ascent.log]	[T-00:00:06]	Waiting for T
+[02:22:36]	[Log]	[Ascent.log]	[T-00:00:02]	Waiting for T
+[02:22:37]	[Log]	[Ascent.log]	[T-00:00:01]	Waiting for T
+[02:22:39]	[Log]	[Ascent.log]	[T+00:00:01]	Ignition
+[02:23:10]	[Log]	[Ascent.log]	[T+00:00:32]	Flameout stage 1
+[02:23:16]	[Log]	[Ascent.log]	[T+00:00:38]	Separation stage 1
+[02:23:22]	[Log]	[Ascent.log]	[T+00:00:44]	Ignition stage 2
+[02:24:23]	[Log]	[Ascent.log]	[T+00:01:45]	Flameout stage 2
+[02:24:37]	[Log]	[Ascent.log]	[T+00:01:59]	Separation stage 2
+[02:24:44]	[Log]	[Ascent.log]	[T+00:02:06]	Shed fairings and turn prograde
+[02:25:06]	[Log]	[Ascent.log]	[T+00:02:28]	Ignition stage 3
+[02:25:36]	[Log]	[Ascent.log]	[T+00:02:57]	Target apoapsis altitude reached
+[02:25:42]	[Log]	[Ascent.log]	[T+00:03:03]	Coasting to cicularization
+[02:32:33]	[Log]	[Ascent.log]	[T+00:09:56]	Throttle back stage 3
+[02:32:37]	[Log]	[Ascent.log]	[T+00:09:59]	Separation stage 3
+[02:32:37]	[Log]	[Ascent.log]	[T+00:09:59]	Continuing circulization with thrusters
+[02:35:58]	[Comms]	Communications lost
+[02:35:58]	[Comms]	Connection to KSC lost
+[03:00:30]	[Comms]	Communications established
+[03:00:30]	[Comms]	Connection to KSC established
+[03:14:45]	[Comms]	Communications established
+[03:14:45]	[Comms]	Connection to KSC established
+[03:14:45]	[OS]	NOTICE: Unable to load optional module 'saveStates'
+[03:14:47]	[OS]	System has booted up successfully
+[03:14:48]	[OS]	Entering operations main loop
+[03:14:49]	[Log]	[operations.log]	[Tnull]	Loading operations #0
+[03:14:49]	[Log]	[operations.log]	[Tnull]	Ops ops_0.ks downloaded successfully
+[03:14:50]	[Log]	[operations.log]	[Tnull]	Importing operations /ops/ops_0.ks
+[03:14:51]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Initializing LKOC Orbital Period adjustment
+[03:14:52]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Initial parameters accepted
+[03:14:53]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Current period: 2700 Target period: 2700
+[03:14:54]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Will Accelerate
+[03:18:20]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Current period: 2700 Target period: 2700
+[03:18:21]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Periodisation operations completed.
+[03:20:42]	[Log]	[operations.log]	[Tnull]	Loading operations #1
+[03:20:44]	[Log]	[operations.log]	[Tnull]	Ops ops_1.ks downloaded successfully
+[03:20:45]	[Log]	[operations.log]	[Tnull]	Importing operations /ops/ops_1.ks
+[03:20:47]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Initializing LKOC Orbital Period adjustment
+[03:20:48]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Initial parameters accepted
+[03:20:49]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Current period: 2700 Target period: 2700
+[03:20:49]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Will descelerate
+[03:21:06]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Current period: 2700 Target period: 2700
+[03:21:06]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Will Accelerate
+[03:21:21]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Current period: 2700 Target period: 2700
+[03:21:21]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Periodisation operations completed.
