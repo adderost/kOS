@@ -19,7 +19,7 @@ FUNCTION LKOC_Periodisation_initcheck {
 	}
 	ELSE {
 		log_output("Initial parameters rejected. Will abort", "LKOC_Periodisation.log").
-		operations_add(LKOC_End_Periodisation).
+		operations_add(LKOC_End_Periodisation@).
 	}
 }
 
