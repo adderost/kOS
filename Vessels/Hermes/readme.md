@@ -27,3 +27,17 @@ The Launch Vehicle is a slightly modified and modernized version of the Continua
 
 ## The Payloads
 *This section will be updated with information on the launched payloads as they are planned and completed*
+
+![alt text](https://raw.githubusercontent.com/adderost/kOS/master/Vessels/Hermes/Ena/Hermes-Ena.png "Hermes - Ena satellite")
+
+
+### Hermes - Ena (Active)
+*The first of five identical satellites designed to provide continuous communications coverage along the equator*
+
+  * The goal of these satellites is to sit in an orbit between 250 and 300km with an orbital period of exactly 45 minutes. (Or as close to as is possible)
+  * With a near perfect recovery of the first three stages we saved $6222 on the launch
+  * An unknown bug in the software caused an error where the circulization routine couldn't enter its complete-state. Therefore it didn't automatically load the periodization routine.
+  * A quick bugfix was issued and the OS was rebooted. However, cached files caused the system to get stuck in a reboot-loop
+  * We remotely stopped OS2 and manually removed cached files, thus enabling the OS to reboot proper. A bug-report is issued to the OS2 developers and will hopefully be fixed before the next launch.
+  * Hermes - Ena is now in a stable orbit with a period of 45 minutes, 0.02 seconds. 
+  * Our ops-team is currently working on increasing the accuracy for our periodization routine to shave off those .02 seconds.
