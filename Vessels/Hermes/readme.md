@@ -28,11 +28,10 @@ The Launch Vehicle is a slightly modified and modernized version of the Continua
 ## The Payloads
 *This section will be updated with information on the launched payloads as they are planned and completed*
 
-![alt text](https://raw.githubusercontent.com/adderost/kOS/master/Vessels/Hermes/Ena/Hermes-Ena.png "Hermes - Ena satellite")
-
-
 ### Hermes - Ena (Active)
 *The first of five identical satellites designed to provide continuous communications coverage along the equator*
+
+![alt text](https://raw.githubusercontent.com/adderost/kOS/master/Vessels/Hermes/Ena/Hermes-Ena.png "Hermes - Ena satellite")
 
   * The goal of these satellites is to sit in an orbit between 250 and 300km with an orbital period of exactly 45 minutes. (Or as close to as is possible)
   * With a near perfect recovery of the first three stages we saved $6222 on the launch
