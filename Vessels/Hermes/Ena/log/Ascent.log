@@ -16,3 +16,10 @@
 [T+00:09:56]	Throttle back stage 3
 [T+00:09:59]	Separation stage 3
 [T+00:09:59]	Continuing circulization with thrusters
+[Tnull]	Initializing LKOC Ascent & Circulization operations
+[T-00:00:-10]	Waiting for T
+[T-00:00:05]	Waiting for T
+[T+00:00:00]	Ignition
+[T+00:00:08]	Flameout stage 1
+[T+00:00:13]	Separation stage 1
+[T+00:00:16]	Ignition stage 2

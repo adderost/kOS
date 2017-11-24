@@ -40,3 +40,4 @@ The Launch Vehicle is a slightly modified and modernized version of the Continua
   * We remotely stopped OS2 and manually removed cached files, thus enabling the OS to reboot proper. A bug-report is issued to the OS2 developers and will hopefully be fixed before the next launch.
   * Hermes - Ena is now in a stable orbit with a period of 45 minutes, 0.02 seconds. 
   * Our ops-team is currently working on increasing the accuracy for our periodization routine to shave off those .02 seconds.
+  * New ops were uploaded and executed. Hermes - Ena now has an orbital period of 45 minutes, 0.00 seconds.

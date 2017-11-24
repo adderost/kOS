@@ -58,3 +58,97 @@
 [03:21:06]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Will Accelerate
 [03:21:21]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Current period: 2700 Target period: 2700
 [03:21:21]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Periodisation operations completed.
+[04:01:41]	[Comms]	Communications established
+[04:01:41]	[Comms]	Connection to KSC established
+[04:01:41]	[OS]	NOTICE: Unable to load optional module 'saveStates'
+[04:01:43]	[OS]	System has booted up successfully
+[04:01:44]	[OS]	Entering operations main loop
+[04:01:44]	[Log]	[operations.log]	[Tnull]	Loading operations #0
+[04:01:45]	[Log]	[operations.log]	[Tnull]	Ops ops_0.ks downloaded successfully
+[04:01:46]	[Log]	[operations.log]	[Tnull]	Loading operations #1
+[04:01:46]	[Log]	[operations.log]	[Tnull]	Unable to download ops - Not enough memory?
+[04:01:47]	[Log]	[operations.log]	[Tnull]	Importing operations /ops/ops_0.ks
+[04:01:50]	[Log]	[Ascent.log]	[Tnull]	Initializing LKOC Ascent & Circulization operations
+[04:01:52]	[Time]	T set to 04:02:02
+[04:01:53]	[Log]	[Ascent.log]	[T-00:00:-10]	Waiting for T
+[04:01:55]	[Log]	[operations.log]	[T-00:00:08]	Loading operations #1
+[04:01:56]	[Log]	[operations.log]	[T-00:00:07]	Ops ops_1.ks downloaded successfully
+[04:01:57]	[Log]	[Ascent.log]	[T-00:00:05]	Waiting for T
+[04:01:59]	[Log]	[operations.log]	[T-00:00:04]	Loading operations #2
+[04:02:02]	[Log]	[operations.log]	[T-00:00:01]	Ops ops_2.ks downloaded successfully
+[04:02:03]	[Log]	[Ascent.log]	[T+00:00:00]	Ignition
+[04:02:11]	[Log]	[Ascent.log]	[T+00:00:08]	Flameout stage 1
+[04:02:16]	[Log]	[Ascent.log]	[T+00:00:13]	Separation stage 1
+[04:02:18]	[Log]	[Ascent.log]	[T+00:00:16]	Ignition stage 2
+[04:02:53]	[Comms]	Communications established
+[04:02:53]	[Comms]	Connection to KSC established
+[04:02:53]	[OS]	NOTICE: Unable to load optional module 'saveStates'
+[04:02:56]	[OS]	System has booted up successfully
+[04:02:56]	[OS]	Entering operations main loop
+[04:03:16]	[Log]	[operations.log]	[Tnull]	Loading operations #0
+[04:03:16]	[Log]	[operations.log]	[Tnull]	Ops ops_0.ks downloaded successfully
+[04:03:17]	[Log]	[operations.log]	[Tnull]	Importing operations /ops/ops_0.ks
+[04:03:18]	[Log]	[Periodisation.log]	[Tnull]	Initializing LKOC Orbital Period adjustment
+[04:03:19]	[Log]	[Periodisation.log]	[Tnull]	Initial parameters accepted
+[04:03:20]	[Log]	[Periodisation.log]	[Tnull]	Limiting RCS-Thrust
+[04:03:22]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2700.0205 Target period: 2700
+[04:03:22]	[Log]	[Periodisation.log]	[Tnull]	Will descelerate
+[04:03:23]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2699.3423 Target period: 2700
+[04:03:23]	[Log]	[Periodisation.log]	[Tnull]	Will Accelerate
+[04:04:43]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2700.0036 Target period: 2700
+[04:04:43]	[Log]	[Periodisation.log]	[Tnull]	Will descelerate
+[04:04:44]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2699.9733 Target period: 2700
+[04:04:44]	[Log]	[Periodisation.log]	[Tnull]	Will Accelerate
+[04:04:46]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2700.0032 Target period: 2700
+[04:04:46]	[Log]	[Periodisation.log]	[Tnull]	Will descelerate
+[04:04:47]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2699.9852 Target period: 2700
+[04:04:47]	[Log]	[Periodisation.log]	[Tnull]	Will Accelerate
+[04:05:01]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2700.0071 Target period: 2700
+[04:05:02]	[Log]	[Periodisation.log]	[Tnull]	Will descelerate
+[04:05:02]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2699.9802 Target period: 2700
+[04:05:03]	[Log]	[Periodisation.log]	[Tnull]	Will Accelerate
+[04:05:06]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2700.0086 Target period: 2700
+[04:05:06]	[Log]	[Periodisation.log]	[Tnull]	Will descelerate
+[04:05:07]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2699.5869 Target period: 2700
+[04:05:08]	[Log]	[Periodisation.log]	[Tnull]	Will Accelerate
+[04:06:13]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2700.0002 Target period: 2700
+[04:06:15]	[Log]	[Periodisation.log]	[Tnull]	Unlimiting RCS-Thrust
+[04:06:17]	[Log]	[Periodisation.log]	[Tnull]	Periodisation operations completed.
+[04:06:57]	[Log]	[operations.log]	[Tnull]	Loading operations #1
+[04:06:58]	[Log]	[operations.log]	[Tnull]	Ops ops_1.ks downloaded successfully
+[04:07:02]	[Log]	[operations.log]	[Tnull]	Loading operations #2
+[04:07:04]	[Log]	[operations.log]	[Tnull]	Ops ops_2.ks downloaded successfully
+[04:07:06]	[Log]	[operations.log]	[Tnull]	Importing operations /ops/ops_1.ks
+[04:07:08]	[Log]	[LKOC_Periodisation.log]	[Tnull]	Initializing LKOC Orbital Period adjustment
+[04:07:10]	[Log]	[Periodisation.log]	[Tnull]	Initial parameters accepted
+[04:07:11]	[Log]	[Periodisation.log]	[Tnull]	Limiting RCS-Thrust
+[04:07:14]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2700.0021 Target period: 2700
+[04:07:14]	[Log]	[Periodisation.log]	[Tnull]	Will descelerate
+[04:07:17]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2699.5589 Target period: 2700
+[04:07:17]	[Log]	[Periodisation.log]	[Tnull]	Will Accelerate
+[04:08:38]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2700.0006 Target period: 2700
+[04:08:39]	[Log]	[Periodisation.log]	[Tnull]	Unlimiting RCS-Thrust
+[04:08:41]	[Log]	[Periodisation.log]	[Tnull]	Periodisation operations completed.
+[04:08:44]	[Log]	[operations.log]	[Tnull]	Importing operations /ops/ops_2.ks
+[04:08:47]	[Log]	[Periodisation.log]	[Tnull]	Initializing LKOC Orbital Period adjustment
+[04:08:49]	[Log]	[Periodisation.log]	[Tnull]	Initial parameters accepted
+[04:08:50]	[Log]	[Periodisation.log]	[Tnull]	Limiting RCS-Thrust
+[04:08:52]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2700.0006 Target period: 2700
+[04:08:52]	[Log]	[Periodisation.log]	[Tnull]	Will descelerate
+[04:08:53]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2699.6944 Target period: 2700
+[04:08:54]	[Log]	[Periodisation.log]	[Tnull]	Will Accelerate
+[04:09:45]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2700.0082 Target period: 2700
+[04:09:45]	[Log]	[Periodisation.log]	[Tnull]	Will descelerate
+[04:09:47]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2699.9799 Target period: 2700
+[04:09:47]	[Log]	[Periodisation.log]	[Tnull]	Will Accelerate
+[04:09:54]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2700.0034 Target period: 2700
+[04:09:55]	[Log]	[Periodisation.log]	[Tnull]	Will descelerate
+[04:09:55]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2699.9762 Target period: 2700
+[04:09:56]	[Log]	[Periodisation.log]	[Tnull]	Will Accelerate
+[04:10:01]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2700.001 Target period: 2700
+[04:10:01]	[Log]	[Periodisation.log]	[Tnull]	Will descelerate
+[04:10:02]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2699.9863 Target period: 2700
+[04:10:02]	[Log]	[Periodisation.log]	[Tnull]	Will Accelerate
+[04:10:05]	[Log]	[Periodisation.log]	[Tnull]	Current period: 2700.0001 Target period: 2700
+[04:10:06]	[Log]	[Periodisation.log]	[Tnull]	Unlimiting RCS-Thrust
+[04:10:09]	[Log]	[Periodisation.log]	[Tnull]	Periodisation operations completed.
