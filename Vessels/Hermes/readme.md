@@ -41,3 +41,13 @@ The Launch Vehicle is a slightly modified and modernized version of the Continua
   * Hermes - Ena is now in a stable orbit with a period of 45 minutes, 0.02 seconds. 
   * Our ops-team is currently working on increasing the accuracy for our periodization routine to shave off those .02 seconds.
   * New ops were uploaded and executed. Hermes - Ena now has an orbital period of 45 minutes, 0.00 seconds.
+
+### Hermes - Dio (Active)
+*The first of five identical satellites designed to provide continuous communications coverage along the equator*
+
+![alt text](https://raw.githubusercontent.com/adderost/kOS/master/Vessels/Hermes/Dio/Hermes-Dio.png "Hermes - Dio satellite")
+
+  * All launch stages were recovered successfully
+  * We did not experience the circularization bug on this launch. Even though we didn't have time to update the software
+  * Hermes - Dio is now in a stable orbit with a period of 45 minutes, 0 seconds. 
+  * The periodisation routine used was the new one tested on Hermes - Ena a few weeks earlier
