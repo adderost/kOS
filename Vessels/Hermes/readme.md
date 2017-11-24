@@ -43,7 +43,6 @@ The Launch Vehicle is a slightly modified and modernized version of the Continua
   * New ops were uploaded and executed. Hermes - Ena now has an orbital period of 45 minutes, 0.00 seconds.
 
 ### Hermes - Dio (Active)
-*The first of five identical satellites designed to provide continuous communications coverage along the equator*
 
 ![alt text](https://raw.githubusercontent.com/adderost/kOS/master/Vessels/Hermes/Dio/Hermes-Dio.png "Hermes - Dio satellite")
 
