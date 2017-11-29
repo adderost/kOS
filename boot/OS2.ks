@@ -48,7 +48,7 @@ FUNCTION loadModule{	//Loads and runs a named module.
 		IF moduleLoaded{
 			RUNPATH(modulePath).
 			SET loadedModules[module] TO TRUE.
-			//IF hasModule("IO") io_syslog("Loaded module: "+module, "OS").
+			IF hasModule("IO") io_syslog("Loaded module: "+module, "OS").
 			IF NOT saveLocalModules {
 				CORE:VOLUME:DELETE(modulePath).
 			}
