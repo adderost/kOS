@@ -1,0 +1,72 @@
+[05:50:53]	[OS]	Loaded module: IO
+[05:50:53]	[Comms]	Communications established
+[05:50:53]	[Comms]	Connection to KSC established
+[05:50:53]	[OS]	Loaded module: system
+[05:50:54]	[OS]	Loaded module: log
+[05:50:54]	[OS]	NOTICE: Unable to load optional module 'saveStates'
+[05:50:54]	[OS]	Loaded module: operations
+[05:50:56]	[OS]	Loaded module: string
+[05:50:56]	[OS]	Loaded module: cli
+[05:50:57]	[OS]	Loaded module: resources
+[05:50:57]	[OS]	System has booted up successfully
+[05:50:58]	[OS]	Entering operations main loop
+[05:50:58]	[Log]	[operations.log]	[Tnull]	Loading operations #0
+[05:50:59]	[Log]	[operations.log]	[Tnull]	Ops ops_0.ks downloaded successfully
+[05:51:00]	[Log]	[operations.log]	[Tnull]	Loading operations #1
+[05:51:00]	[Log]	[operations.log]	[Tnull]	Unable to download ops - Not enough memory?
+[05:51:01]	[Log]	[operations.log]	[Tnull]	Importing operations /ops/ops_0.ks
+[05:51:03]	[OS]	Loaded module: telemetry
+[05:51:04]	[Log]	[Ascent.log]	[Tnull]	Initializing LKOC Ascent & Circulization operations
+[05:51:06]	[Time]	T set to 05:51:16
+[05:51:08]	[Log]	[Ascent.log]	[T-00:00:09]	Waiting for T
+[05:51:09]	[Log]	[operations.log]	[T-00:00:08]	Loading operations #1
+[05:51:10]	[Log]	[operations.log]	[T-00:00:07]	Ops ops_1.ks downloaded successfully
+[05:51:12]	[Log]	[Ascent.log]	[T-00:00:05]	Waiting for T
+[05:51:13]	[Log]	[Ascent.log]	[T-00:00:04]	Waiting for T
+[05:51:16]	[Log]	[Ascent.log]	[T-00:00:01]	Waiting for T
+[05:51:18]	[Log]	[Ascent.log]	[T+00:00:01]	Ignition
+[05:51:49]	[Log]	[Ascent.log]	[T+00:00:33]	Flameout stage 1
+[05:51:54]	[Log]	[Ascent.log]	[T+00:00:37]	Separation stage 1
+[05:52:02]	[Log]	[Ascent.log]	[T+00:00:45]	Ignition stage 2
+[05:53:02]	[Log]	[Ascent.log]	[T+00:01:45]	Flameout stage 2
+[05:53:15]	[Log]	[Ascent.log]	[T+00:01:58]	Separation stage 2
+[05:53:21]	[Log]	[Ascent.log]	[T+00:02:05]	Shed fairings and turn prograde
+[05:53:43]	[Log]	[Ascent.log]	[T+00:02:26]	Ignition stage 3
+[05:54:09]	[Log]	[Ascent.log]	[T+00:02:51]	Target apoapsis altitude reached
+[05:54:14]	[Log]	[Ascent.log]	[T+00:02:56]	Coasting to circularization
+[05:58:57]	[Comms]	Communications lost
+[05:58:57]	[Comms]	Connection to KSC lost
+[00:01:11]	[Log]	[Ascent.log]	[T+00:09:54]	Throttle back stage 3
+[00:01:13]	[Log]	[Ascent.log]	[T+00:09:57]	Separation stage 3
+[00:01:13]	[Log]	[Ascent.log]	[T+00:09:57]	Continuing circulization with thrusters
+[00:02:21]	[Log]	[Ascent.log]	[T+00:11:05]	Ascent/Circulization operations completed.
+[00:02:22]	[Log]	[operations.log]	[T+00:11:05]	Importing operations /ops/ops_1.ks
+[00:02:22]	[Log]	[Periodisation.log]	[T+00:11:06]	Initializing LKOC Orbital Period adjustment
+[00:02:23]	[Log]	[Periodisation.log]	[T+00:11:06]	Initial parameters accepted
+[00:02:23]	[Log]	[Periodisation.log]	[T+00:11:06]	Limiting RCS-Thrust
+[00:02:23]	[Log]	[Periodisation.log]	[T+00:11:07]	Current period: 2667.5419 Target period: 2700
+[00:02:24]	[Log]	[Periodisation.log]	[T+00:11:07]	Will Accelerate
+[00:03:46]	[Comms]	Communications established
+[00:03:46]	[Comms]	Connection to KSC established
+[00:03:46]	[Log]	Dumping cached log Ascent.log
+[00:03:47]	[Log]	Dumping cached log operations.log
+[00:03:47]	[Log]	Dumping cached log Periodisation.log
+[00:14:40]	[Log]	[Periodisation.log]	[T+00:23:24]	Current period: 2700.0033 Target period: 2700
+[00:14:40]	[Log]	[Periodisation.log]	[T+00:23:24]	Will descelerate
+[00:14:41]	[Log]	[Periodisation.log]	[T+00:23:24]	Current period: 2699.9806 Target period: 2700
+[00:14:42]	[Log]	[Periodisation.log]	[T+00:23:25]	Will Accelerate
+[00:14:45]	[Log]	[Periodisation.log]	[T+00:23:28]	Current period: 2700.0037 Target period: 2700
+[00:14:45]	[Log]	[Periodisation.log]	[T+00:23:28]	Will descelerate
+[00:14:46]	[Log]	[Periodisation.log]	[T+00:23:30]	Current period: 2699.5828 Target period: 2700
+[00:14:47]	[Log]	[Periodisation.log]	[T+00:23:30]	Will Accelerate
+[00:15:54]	[Log]	[Periodisation.log]	[T+00:24:37]	Current period: 2700.0015 Target period: 2700
+[00:15:54]	[Log]	[Periodisation.log]	[T+00:24:38]	Will descelerate
+[00:15:56]	[Log]	[Periodisation.log]	[T+00:24:40]	Current period: 2699.9048 Target period: 2700
+[00:15:57]	[Log]	[Periodisation.log]	[T+00:24:40]	Will Accelerate
+[00:16:15]	[Log]	[Periodisation.log]	[T+00:24:58]	Current period: 2700.0049 Target period: 2700
+[00:16:15]	[Log]	[Periodisation.log]	[T+00:24:59]	Will descelerate
+[00:16:16]	[Log]	[Periodisation.log]	[T+00:25:00]	Current period: 2699.9019 Target period: 2700
+[00:16:17]	[Log]	[Periodisation.log]	[T+00:25:00]	Will Accelerate
+[00:16:27]	[Log]	[Periodisation.log]	[T+00:25:11]	Current period: 2700.0007 Target period: 2700
+[00:16:28]	[Log]	[Periodisation.log]	[T+00:25:11]	Unlimiting RCS-Thrust
+[00:16:31]	[Log]	[Periodisation.log]	[T+00:25:14]	Periodisation operations completed.
