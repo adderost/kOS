@@ -1,0 +1,17 @@
+[Tnull]	Initializing LKOC Ascent & Circulization operations
+[T-00:00:09]	Waiting for T
+[T-00:00:04]	Waiting for T
+[T+00:00:00]	Ignition
+[T+00:00:32]	Flameout stage 1
+[T+00:00:36]	Separation stage 1
+[T+00:00:40]	Ignition stage 2
+[T+00:01:40]	Flameout stage 2
+[T+00:01:52]	Separation stage 2
+[T+00:01:58]	Shed fairings and turn prograde
+[T+00:02:19]	Ignition stage 3
+[T+00:02:47]	Target apoapsis altitude reached
+[T+00:02:53]	Coasting to circularization
+[T+00:09:18]	Throttle back stage 3
+[T+00:09:23]	Separation stage 3
+[T+00:09:24]	Continuing circulization with thrusters
+[T+00:10:59]	Ascent/Circulization operations completed.
