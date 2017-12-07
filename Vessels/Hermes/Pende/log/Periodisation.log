@@ -1,0 +1,16 @@
+[T+00:11:30]	Initializing LKOC Orbital Period adjustment
+[T+00:11:32]	Initial parameters accepted
+[T+00:11:36]	Limiting RCS-Thrust
+[T+00:11:41]	Current period: 2623.5055 Target period: 2700
+[T+00:11:41]	Will Accelerate
+[T+00:18:19]	Current period: 2700.3905 Target period: 2700
+[T+00:18:35]	Will descelerate
+[T+00:18:52]	Current period: 2699.7148 Target period: 2700
+[T+00:18:52]	Will Accelerate
+[T+00:19:37]	Current period: 2700.0023 Target period: 2700
+[T+00:19:37]	Will descelerate
+[T+00:19:38]	Current period: 2699.9806 Target period: 2700
+[T+00:19:38]	Will Accelerate
+[T+00:19:42]	Current period: 2700.001 Target period: 2700
+[T+00:19:42]	Unlimiting RCS-Thrust
+[T+00:19:45]	Periodisation operations completed.
